@@ -3,8 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useGetClientQuery } from "../store/api/apiSlice";
 import { store } from "../store";
+import { useSelector } from "react-redux";
 
 const Client = () => {
+  const { user } = useSelector((s) => s.user);
   const { clientId } = useParams();
   const {
     data: client,
