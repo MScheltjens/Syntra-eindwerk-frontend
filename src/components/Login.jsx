@@ -1,53 +1,37 @@
-import { useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { store } from "../store";
+import { useLoginUserMutation } from "../store/api/authApiSlice";
+import userSlice, { login } from "../store/userSlice/userSlice";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loginUser, { data, isError, error }] = useLoginUserMutation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let headersList = {
-      Accept: "*/*",
-      "Content-Type": "application/json",
-    };
-
-    let bodyContent = JSON.stringify({
+    await loginUser({
       email: "mathias.scheltjens@gmail.com",
       password: "test",
     });
-
-    let reqOptions = {
-      url: "https://localhost:8000/login",
-      method: "POST",
-      headers: headersList,
-      data: bodyContent,
-    };
-
-    axios.request(reqOptions).then(function (response) {
-      console.log(response.data);
-    });
   };
+
+  useEffect(() => {
+    if (data) {
+      dispatch(login({ data }));
+      navigate(`/dashboard`);
+    }
+    if (isError) {
+      console.log(error);
+    }
+  }, [data, isError]);
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <p>{email}</p>
-        <label>Password</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p>{password}</p>
-        <button>login!</button>
-      </form>
+      {data && <p>{JSON.stringify(data)}</p>}
+      <button onClick={handleSubmit}>login</button>
     </div>
   );
 };

@@ -3,8 +3,10 @@ import { useParams, Link, Routes, Route } from "react-router-dom";
 import { useGetClientsAndDogsQuery } from "../store/api/apiSlice";
 import DogCard from "./DogCard";
 import { Grid, GridItem, Button } from "@chakra-ui/react";
+import { store } from "../store";
 
 const Dashboard = () => {
+  console.log(store.getState());
   const params = useParams();
   console.log(params);
   const {
