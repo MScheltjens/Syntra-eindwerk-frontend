@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
 import { useGetClientQuery } from "../store/api/apiSlice";
-import { store } from "../store";
 import { useSelector } from "react-redux";
 
 const Client = () => {
