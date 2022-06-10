@@ -23,16 +23,7 @@ const App = () => {
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="add" element={<Add />} />
-            <Route path="clients">
-              <Route
-                path="/dashboard/clients/:clientId"
-                element={<Client />}
-              ></Route>
-            </Route>
-            <Route path="/dashboard/dogs/:dogId/*" element={<Dog />}>
-              {" "}
-              {/* <Route index element={<Dog />} /> */}
-            </Route>
+
             <Route path="/dashboard/dog_exes/:dogExId">
               <Route index element={<DogExercise />} />
             </Route>
