@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { store } from "../store";
 import { useLoginUserMutation } from "../store/api/authApiSlice";
 import userSlice, { login } from "../store/userSlice/userSlice";
+import { Button } from "@chakra-ui/react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,8 +14,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await loginUser({
-      email: "mathias.scheltjens@gmail.com",
-      password: "test",
+      email: "admin@admin.be",
+      password: "administrator",
     });
   };
 
@@ -31,7 +32,7 @@ const Login = () => {
   return (
     <div>
       {data && <p>{JSON.stringify(data)}</p>}
-      <button onClick={handleSubmit}>login</button>
+      <Button onClick={handleSubmit}>login</Button>
     </div>
   );
 };

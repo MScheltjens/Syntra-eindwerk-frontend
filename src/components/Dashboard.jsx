@@ -8,30 +8,13 @@ import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const { user } = useSelector((s) => s.user);
-  console.log(user);
+  console.log(user.data);
   const params = useParams();
   console.log(params);
-  const {
-    data: trainer,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetClientsAndDogsQuery(1); //change with id from context
-
-  return (
-    <>
-      {trainer && (
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-          {trainer.clients.map((client) => (
-            <GridItem w="200px" h="200px" bg="blue.500">
-              <DogCard client={client} />
-            </GridItem>
-          ))}
-        </Grid>
-      )}
-    </>
-  );
+  const { data, isLoading, isSuccess, isError, error } =
+    useGetClientsAndDogsQuery(1); //change with id from context
+  console.log(store.getState().user);
+  return <>{JSON.stringify(data)}</>;
 };
 
 export default Dashboard;

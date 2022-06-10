@@ -1,12 +1,25 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const baseQuery = fetchBaseQuery({
+  baseUrl: "http://localhost:8000/api/",
+  prepareHeaders: (headers, { getState }) => {
+    const token = getState().user.data.token;
+
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
 export const apiSlice = createApi({
   reducerPath: "dogTrainerApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://127.0.0.1:8002/api/" }),
+  // baseQuery: fetchBaseQuery({ baseUrl: "https://127.0.0.1:8000/api/" }),
+  baseQuery,
   tagtypes: ["Dog"],
   endpoints: (builder) => ({
     getClientsAndDogs: builder.query({
-      query: (trainerId) => `/trainers/${trainerId}`,
+      query: (trainerId) => `/users/${trainerId}`,
     }),
     getClient: builder.query({
       query: (clientId) => `/clients/${clientId}`,
