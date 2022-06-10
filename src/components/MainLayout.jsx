@@ -1,14 +1,17 @@
 import { Outlet } from "react-router";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Box } from "@chakra-ui/react";
 
 const MainLayout = () => {
   return (
-    <div>
+    <Box>
       <Header />
-      <Outlet />
+      <Box height="80vh">
+        <Outlet />
+      </Box>
       <Footer />
-    </div>
+    </Box>
   );
 };
 

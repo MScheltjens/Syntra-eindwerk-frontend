@@ -5,7 +5,9 @@ const DashboardLayout = () => {
   return (
     <div style={{ display: "flex" }}>
       <Sidebar />
-      <Outlet />
+      <div style={{ minHeight: "85" }}>
+        <Outlet />
+      </div>
     </div>
   );
 };

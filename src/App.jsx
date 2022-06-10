@@ -4,7 +4,6 @@ import Add from "./components/Add";
 import Home from "./components/Home";
 import "./App.css";
 
-import Client from "./components/Client";
 import DogExercise from "./components/DogExercise";
 import Exercises from "./components/Exercises";
 import Exercise from "./components/Exercise";
@@ -20,17 +19,13 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="dashboard" element={<DashboardLayout />}>
+          <Route path="dashboard/*" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="add" element={<Add />} />
-
-            <Route path="/dashboard/dog_exes/:dogExId">
-              <Route index element={<DogExercise />} />
-            </Route>
-            <Route path="/dashboard/exercises">
-              <Route index element={<Exercises />} />
-              <Route path="/dashboard/exercises/:exId" element={<Exercise />} />
-              <Route path="/dashboard/exercises/add" element={<Add />} />
+            <Route path="exercises" element={<Exercises />}>
+              <Route path="dog_exes/:dogExId">
+                <Route index element={<DogExercise />} />
+              </Route>
             </Route>
           </Route>
         </Route>
