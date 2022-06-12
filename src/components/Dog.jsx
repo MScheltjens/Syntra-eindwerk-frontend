@@ -5,16 +5,18 @@ import {
   ListItem,
   Box,
   List,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { useParams } from "react-router";
-import { useGetDogQuery } from "../store/api/apiSlice";
+import { useGetDogQuery, useDeleteDogMutation } from "../store/api/apiSlice";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
-import CreateDogExercise from "./CreateDogExercise";
+import CreateDogExerciseModal from "./CreateDogExerciseModal";
 
 const Dog = () => {
   const { dogId } = useParams();
   const navigate = useNavigate();
+
   const {
     data: dog,
     isLoading,
@@ -22,6 +24,12 @@ const Dog = () => {
     isError,
     error,
   } = useGetDogQuery(dogId);
+  const [deleteDog, {}] = useDeleteDogMutation();
+  const handleClick = () => {
+    deleteDog(dogId);
+    navigate(-1);
+  };
+
   return (
     <>
       <Center>
@@ -39,20 +47,22 @@ const Dog = () => {
                 </ListItem>
               ))}
             </OrderedList>
-            <Link to={"createExercise"}>
+            {/* <Link to={"createExercise"}>
               <button>Add exercise</button>
               <button onClick={() => navigate(-1)}>close</button>
-            </Link>
-            <Routes>
+            </Link> */}
+            <Button onClick={handleClick}>Delete dog</Button>
+            {/* <Routes>
               <Route
                 path={`createExercise`}
                 element={
                   <CreateDogExercise dogName={dog.name} dogId={dog.id} />
                 }
               />
-            </Routes>
+            </Routes> */}
           </Box>
         )}
+        <CreateDogExerciseModal />
       </Center>
     </>
   );

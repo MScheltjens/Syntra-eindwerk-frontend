@@ -16,7 +16,7 @@ const userSlice = createSlice({
         id: payload.data.id,
         name: payload.data.name,
         firstName: payload.data.firstName,
-        registerDatet: payload.data.registerDate,
+        registerDate: payload.data.registerDate,
       };
     },
   },

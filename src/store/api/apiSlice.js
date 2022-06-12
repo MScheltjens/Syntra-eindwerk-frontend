@@ -33,6 +33,7 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getUser: builder.query({
       query: (userId) => `/users/${userId}`,
+      providesTags: ["Dog"],
     }),
     getDog: builder.query({
       query: (dogId) => `/dogs/${dogId}`,
@@ -55,6 +56,21 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Dog"],
     }),
+    addDog: builder.mutation({
+      query: (dog) => ({
+        url: "/dogs",
+        method: "POST",
+        body: dog,
+      }),
+      invalidatesTags: ["Dog"],
+    }),
+    deleteDog: builder.mutation({
+      query: (dogId) => ({
+        url: `/dogs/${dogId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Dog"],
+    }),
   }),
 });
 
@@ -65,4 +81,6 @@ export const {
   useGetExercisesQuery,
   useGetExerciseQuery,
   useAddDogExeMutation,
+  useAddDogMutation,
+  useDeleteDogMutation,
 } = apiSlice;

@@ -6,6 +6,7 @@ import {
   Divider,
   Avatar,
   Heading,
+  Box,
 } from "@chakra-ui/react";
 import { store } from "../store";
 
@@ -14,7 +15,6 @@ import NavItem from "../components/NavItem";
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const user = store.getState().user;
-  console.log(user);
 
   return (
     <Flex
