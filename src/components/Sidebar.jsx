@@ -7,16 +7,20 @@ import {
   Avatar,
   Heading,
 } from "@chakra-ui/react";
+import { store } from "../store";
 
 import NavItem from "../components/NavItem";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
+  const user = store.getState().user;
+  console.log(user);
+
   return (
     <Flex
       pos="sticky"
       p="5"
-      h="85vh"
+      h="80vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       borderTopRightRadius={navSize == "small" ? "15px" : "30px"}
       borderBottomRightRadius={navSize == "small" ? "15px" : "30px"}
@@ -70,9 +74,9 @@ export default function Sidebar() {
             display={navSize == "small" ? "none" : "flex"}
           >
             <Heading as="h3" size="sm">
-              Mathias S.
+              {user.name} {user.firstName}
             </Heading>
-            <Text color="gray">Admin</Text>
+            <Text color="gray">{user.registerDate.slice()}</Text>
           </Flex>
         </Flex>
       </Flex>

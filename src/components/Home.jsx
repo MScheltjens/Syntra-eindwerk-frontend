@@ -1,6 +1,6 @@
 import React from "react";
 import { store } from "../store";
-import userSlice from "../store/userSlice/userSlice";
+import userSlice from "../store/userSlice";
 
 const Home = () => {
   console.log(store.getState());

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { store } from "../store";
 import { useLoginUserMutation } from "../store/api/authApiSlice";
-import userSlice, { login } from "../store/userSlice/userSlice";
+import userSlice, { login } from "../store/userSlice";
 import {
   Flex,
   Heading,

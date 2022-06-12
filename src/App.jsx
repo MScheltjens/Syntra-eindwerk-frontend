@@ -22,6 +22,10 @@ const App = () => {
           <Route path="dashboard/*" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="add" element={<Add />} />
+            <Route path="dogs/:dogId/*" element={<Dog />}>
+              {" "}
+              {/* <Route index element={<Dog />} /> */}
+            </Route>
             <Route path="exercises" element={<Exercises />}>
               <Route path="dog_exes/:dogExId">
                 <Route index element={<DogExercise />} />

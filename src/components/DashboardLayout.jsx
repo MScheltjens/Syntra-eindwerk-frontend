@@ -1,14 +1,14 @@
 import { Outlet } from "react-router";
 import Sidebar from "./Sidebar";
-
+import { Flex, Box, Spacer } from "@chakra-ui/react";
 const DashboardLayout = () => {
   return (
-    <div style={{ display: "flex" }}>
+    <Flex>
       <Sidebar />
-      <div style={{ minHeight: "85" }}>
+      <Box flexGrow={2}>
         <Outlet />
-      </div>
-    </div>
+      </Box>
+    </Flex>
   );
 };
 

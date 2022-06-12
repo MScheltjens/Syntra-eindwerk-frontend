@@ -5,13 +5,15 @@ import { Box } from "@chakra-ui/react";
 
 const MainLayout = () => {
   return (
-    <Box>
+    // <Box>
+    <>
       <Header />
-      <Box height="80vh">
-        <Outlet />
-      </Box>
+      {/* <Box height="75vh"> */}
+      <Outlet />
+      {/* </Box> */}
       <Footer />
-    </Box>
+      {/* </Box> */}
+    </>
   );
 };
 

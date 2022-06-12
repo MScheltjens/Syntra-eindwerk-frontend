@@ -1,13 +1,20 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, Routes, Route, useNavigate } from "react-router-dom";
-import axios from "axios";
-import CreateDogExercise from "./CreateDogExercise";
+import {
+  Center,
+  Heading,
+  OrderedList,
+  ListItem,
+  Box,
+  List,
+} from "@chakra-ui/react";
+import React from "react";
+import { useParams } from "react-router";
 import { useGetDogQuery } from "../store/api/apiSlice";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import CreateDogExercise from "./CreateDogExercise";
 
 const Dog = () => {
   const { dogId } = useParams();
   const navigate = useNavigate();
-
   const {
     data: dog,
     isLoading,
@@ -15,31 +22,39 @@ const Dog = () => {
     isError,
     error,
   } = useGetDogQuery(dogId);
-
   return (
-    <div>
-      {dog && (
-        <div>
-          <h2>{dog.name}</h2>
-          {dog.dogExercises.map((ex) => (
-            <Link to={`/dashboard/dog_exes/${ex.id}`}>
-              <p>{ex.startDate}</p>
-              <p>{ex.id}</p>
+    <>
+      <Center>
+        {dog && (
+          <Box>
+            <p>{JSON.stringify(dog.dogExercises)}</p>
+            <Heading>{dog.name}</Heading>
+            <OrderedList>
+              {dog.dogExercises.map((dogEx) => (
+                <ListItem key={dogEx.id}>
+                  <Link to={`/dashboard/dog_exes/${dogEx.id}`}>
+                    <p>{dogEx.startDate}</p>
+                    <p>{dogEx.id}</p>
+                  </Link>
+                </ListItem>
+              ))}
+            </OrderedList>
+            <Link to={"createExercise"}>
+              <button>Add exercise</button>
+              <button onClick={() => navigate(-1)}>close</button>
             </Link>
-          ))}
-          <Link to={"addExercise"}>
-            <button>Add exercise</button>
-            <button onClick={() => navigate(-1)}>Close</button>
-          </Link>
-          <Routes>
-            <Route
-              path={"addExercise"}
-              element={<CreateDogExercise dogName={dog.name} dogId={dog.id} />}
-            />
-          </Routes>
-        </div>
-      )}
-    </div>
+            <Routes>
+              <Route
+                path={`createExercise`}
+                element={
+                  <CreateDogExercise dogName={dog.name} dogId={dog.id} />
+                }
+              />
+            </Routes>
+          </Box>
+        )}
+      </Center>
+    </>
   );
 };
 
