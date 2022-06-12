@@ -17,10 +17,9 @@ const CreateDogExercise = ({ dogName, dogId }) => {
 
   const handleClick = () => {
     addDogExe({
-      totalAmount: 10,
-      amountDone: 1000,
-      dog: "/api/dogs/11",
-      exercise: "/api/exercises/2",
+      Amount: 654,
+      dog: "/api/dogs/1",
+      exercise: "/api/exercises/1",
     });
   };
 

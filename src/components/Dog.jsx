@@ -1,8 +1,17 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, Routes, Route, useNavigate } from "react-router-dom";
-import axios from "axios";
-import CreateDogExercise from "./CreateDogExercise";
-import { useGetDogQuery } from "../store/api/apiSlice";
+import {
+  Center,
+  Heading,
+  OrderedList,
+  ListItem,
+  Box,
+  List,
+  Button,
+} from "@chakra-ui/react";
+import React from "react";
+import { useParams } from "react-router";
+import { useGetDogQuery, useDeleteDogMutation } from "../store/api/apiSlice";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
+import CreateDogExerciseModal from "./CreateDogExerciseModal";
 
 const Dog = () => {
   const { dogId } = useParams();
@@ -15,31 +24,47 @@ const Dog = () => {
     isError,
     error,
   } = useGetDogQuery(dogId);
+  const [deleteDog, {}] = useDeleteDogMutation();
+  const handleClick = () => {
+    deleteDog(dogId);
+    navigate(-1);
+  };
 
   return (
-    <div>
-      {dog && (
-        <div>
-          <h2>{dog.name}</h2>
-          {dog.dogExercises.map((ex) => (
-            <Link to={`/dashboard/dog_exes/${ex.id}`}>
-              <p>{ex.startDate}</p>
-              <p>{ex.id}</p>
-            </Link>
-          ))}
-          <Link to={"addExercise"}>
-            <button>Add exercise</button>
-            <button onClick={() => navigate(-1)}>Close</button>
-          </Link>
-          <Routes>
-            <Route
-              path={"addExercise"}
-              element={<CreateDogExercise dogName={dog.name} dogId={dog.id} />}
-            />
-          </Routes>
-        </div>
-      )}
-    </div>
+    <>
+      <Center>
+        {dog && (
+          <Box>
+            <p>{JSON.stringify(dog.dogExercises)}</p>
+            <Heading>{dog.name}</Heading>
+            <OrderedList>
+              {dog.dogExercises.map((dogEx) => (
+                <ListItem key={dogEx.id}>
+                  <Link to={`/dashboard/dog_exes/${dogEx.id}`}>
+                    <p>{dogEx.startDate}</p>
+                    <p>{dogEx.id}</p>
+                  </Link>
+                </ListItem>
+              ))}
+            </OrderedList>
+            {/* <Link to={"createExercise"}>
+              <button>Add exercise</button>
+              <button onClick={() => navigate(-1)}>close</button>
+            </Link> */}
+            <Button onClick={handleClick}>Delete dog</Button>
+            {/* <Routes>
+              <Route
+                path={`createExercise`}
+                element={
+                  <CreateDogExercise dogName={dog.name} dogId={dog.id} />
+                }
+              />
+            </Routes> */}
+          </Box>
+        )}
+        <CreateDogExerciseModal />
+      </Center>
+    </>
   );
 };
 

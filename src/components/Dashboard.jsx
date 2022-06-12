@@ -1,35 +1,46 @@
-import React from "react";
 import { useParams, Link, Routes, Route } from "react-router-dom";
-import { useGetClientsAndDogsQuery } from "../store/api/apiSlice";
-import DogCard from "./DogCard";
-import { Grid, GridItem, Button } from "@chakra-ui/react";
+import { useGetUserQuery } from "../store/api/apiSlice";
+import DogCard from "../components/DogCard";
 import { store } from "../store";
 import { useSelector } from "react-redux";
+import { SimpleGrid, Box, Center, Input, Flex } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import AddDogModal from "./AddDogModal";
 
 const Dashboard = () => {
-  const { user } = useSelector((s) => s.user);
+  const user = store.getState().user;
   console.log(user);
-  const params = useParams();
-  console.log(params);
-  const {
-    data: trainer,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetClientsAndDogsQuery(1); //change with id from context
+  const { data, isLoading, isSuccess, isError, error } = useGetUserQuery(
+    user.id
+  );
 
   return (
     <>
-      {trainer && (
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-          {trainer.clients.map((client) => (
-            <GridItem w="200px" h="200px" bg="blue.500">
-              <DogCard client={client} />
-            </GridItem>
-          ))}
-        </Grid>
-      )}
+      {/* {user && <p>{JSON.stringify(user.dogs)}</p>} */}
+      <Center as="div" p={50} maxH="80vh">
+        <Flex flexDir="column" gap={30}>
+          {/* <Input placeholder="Search" value={value} onChange={handleFilter} /> */}
+          {data && (
+            <SimpleGrid
+              columns={[1, 3, 5]}
+              spacing="30px"
+              maxH="70vh"
+              overflowY="scroll"
+            >
+              {data.dogs.map(({ id, photo, dogExercises, name }) => (
+                <Link to={`dogs/${id}`} key={id}>
+                  <DogCard
+                    dogPhoto={photo}
+                    dogExe={dogExercises.length}
+                    name={name}
+                  />
+                </Link>
+              ))}
+            </SimpleGrid>
+          )}
+        </Flex>
+        <AddDogModal />
+      </Center>
     </>
   );
 };
