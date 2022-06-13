@@ -4,6 +4,8 @@ import { useNavigate, useParams } from "react-router";
 import { store } from "../store";
 import { useLoginUserMutation } from "../store/api/authApiSlice";
 import userSlice, { login } from "../store/userSlice";
+import { addDogs } from "../store/dogsSlice";
+import { addExercises } from "../store/exerciseSlice";
 import {
   Flex,
   Heading,
@@ -41,7 +43,10 @@ const Login = () => {
   // save userdata in store and redirect to dashboard
   useEffect(() => {
     if (data) {
-      dispatch(login({ data }));
+      dispatch(login(data));
+      // data.dogs(foreach((dog) => dispatch(addDogs(dog))));
+      dispatch(addDogs(data.dogs));
+      dispatch(addExercises(data.exercises));
       navigate(`/dashboard`);
     }
     if (isError) {

@@ -13,10 +13,10 @@ const userSlice = createSlice({
       console.log(payload);
       return {
         ...state,
-        id: payload.data.id,
-        name: payload.data.name,
-        firstName: payload.data.firstName,
-        registerDate: payload.data.registerDate,
+        id: payload.id,
+        name: payload.name,
+        firstName: payload.firstName,
+        registerDate: payload.registerDate,
       };
     },
   },

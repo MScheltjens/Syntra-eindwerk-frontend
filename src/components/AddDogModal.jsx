@@ -57,7 +57,7 @@ const AddDogModal = () => {
                   placeholder="birthdate"
                   type="datetime"
                   onChange={(e) =>
-                    setDog({ ...dog, birthDate: "2021-06-12T13:20:01.024Z" })
+                    setDog({ ...dog, birthDate: e.target.value })
                   }
                 />
               </FormControl>
@@ -74,7 +74,7 @@ const AddDogModal = () => {
                 <FormLabel>Boss</FormLabel>
                 <Input
                   placeholder="add an image url please"
-                  onChange={(e) => setDog({ ...dog, user: "/api/users/1" })}
+                  onChange={(e) => setDog({ ...dog, user: e.target.value })}
                 />
               </FormControl>
               <button type="submit">submit</button>
