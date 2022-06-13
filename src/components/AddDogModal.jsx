@@ -11,6 +11,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Center,
+  Spinner,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useAddDogMutation } from "../store/api/apiSlice";
@@ -23,17 +25,20 @@ const AddDogModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     //still do updates when date and userRelatation is fixed!!
     addDog({
       name: dog.name,
-      birthDate: "2021-06-12T13:20:01.024Z",
+      birthDate: dog.birthDate,
       photo: dog.photo,
       user: "/api/users/1",
     });
   };
   return (
     <>
-      <Button onClick={onOpen}>Add a dog</Button>
+      <Button onClick={onOpen} h="100%">
+        Add a dog
+      </Button>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -55,9 +60,9 @@ const AddDogModal = () => {
                 <FormLabel>BirthDate</FormLabel>
                 <Input
                   placeholder="birthdate"
-                  type="datetime"
+                  type="date"
                   onChange={(e) =>
-                    setDog({ ...dog, birthDate: "2021-06-12T13:20:01.024Z" })
+                    setDog({ ...dog, birthDate: e.target.value })
                   }
                 />
               </FormControl>

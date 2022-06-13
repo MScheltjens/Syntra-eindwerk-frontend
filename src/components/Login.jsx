@@ -21,12 +21,14 @@ import {
   FormControl,
   FormHelperText,
   InputRightElement,
+  Spinner,
 } from "@chakra-ui/react";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [hidden, setHidden] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser, { data, isError, error }] = useLoginUserMutation();
@@ -35,6 +37,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setHidden(true);
     await loginUser({
       email,
       password,
@@ -68,7 +71,18 @@ const Login = () => {
       >
         <Avatar bg="teal.500" />
         <Heading color="teal.400">Welcome</Heading>
-        <Box minW={{ base: "90%", md: "468px" }}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="teal"
+          size="xl"
+          visibility={!hidden ? "hidden" : ""}
+        />
+        <Box
+          minW={{ base: "90%", md: "468px" }}
+          visibility={hidden ? "hidden" : ""}
+        >
           <form onSubmit={handleSubmit}>
             <Stack
               spacing={4}
@@ -117,6 +131,7 @@ const Login = () => {
           </form>
         </Box>
       </Stack>
+
       {/* <Box>
         New to us?{" "}
         <Link color="teal.500" href="#">

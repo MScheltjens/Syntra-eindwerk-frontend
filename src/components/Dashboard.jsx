@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { SimpleGrid, Box, Center, Input, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import AddDogModal from "./AddDogModal";
+import { Spinner } from "@chakra-ui/react";
 
 const Dashboard = () => {
   const user = store.getState().user;
@@ -16,6 +17,11 @@ const Dashboard = () => {
 
   return (
     <>
+      {isLoading && (
+        <Center mt="200px">
+          <Spinner />
+        </Center>
+      )}
       {/* {user && <p>{JSON.stringify(user.dogs)}</p>} */}
       <Center as="div" p={50} maxH="80vh">
         <Flex flexDir="column" gap={30}>
@@ -36,10 +42,10 @@ const Dashboard = () => {
                   />
                 </Link>
               ))}
+              <AddDogModal />
             </SimpleGrid>
           )}
         </Flex>
-        <AddDogModal />
       </Center>
     </>
   );
