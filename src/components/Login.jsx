@@ -44,9 +44,6 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(login(data));
-      // data.dogs(foreach((dog) => dispatch(addDogs(dog))));
-      dispatch(addDogs(data.dogs));
-      dispatch(addExercises(data.exercises));
       navigate(`/dashboard`);
     }
     if (isError) {
