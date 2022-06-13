@@ -14,8 +14,9 @@ import {
   Spacer,
   Spinner,
   AspectRatio,
+  useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import AlertDelete from "./AlertDelete";
 import { useParams } from "react-router";
 import { useGetDogQuery, useDeleteDogMutation } from "../store/api/apiSlice";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
@@ -32,9 +33,9 @@ const Dog = () => {
     isError,
     error,
   } = useGetDogQuery(dogId);
-  const [deleteDog, {}] = useDeleteDogMutation();
-  const handleClick = () => {
-    deleteDog(dogId);
+  const [deleteDog, { data }] = useDeleteDogMutation();
+  const handleDelete = async () => {
+    await deleteDog(dogId);
     navigate(-1);
   };
 
@@ -60,8 +61,13 @@ const Dog = () => {
               rounded="md"
               bg="white"
             >
-              <Heading>{dog.name}</Heading>
-              <Heading size="sm">{dog.birthDate}</Heading>
+              <Flex justify="space-between" align="center">
+                <Box>
+                  <Heading>{dog.name}</Heading>
+                  <Heading size="sm">{dog.birthDate}</Heading>
+                </Box>
+                <AlertDelete handleDelete={handleDelete} />
+              </Flex>
             </GridItem>
             <GridItem
               rowSpan={4}
@@ -71,13 +77,16 @@ const Dog = () => {
               bg="white"
               overflow="hidden"
             >
-              <AspectRatio ratio={4 / 3}>
-                {dog.photo ? (
-                  <Image src={dog.photo} objectFit="cover" />
-                ) : (
-                  <p>No Image</p>
-                )}
-              </AspectRatio>
+              <Flex flexDir="column">
+                <AspectRatio ratio={4 / 3}>
+                  {dog.photo ? (
+                    <Image src={dog.photo} objectFit="cover" />
+                  ) : (
+                    <p>No Image</p>
+                  )}
+                </AspectRatio>
+                <CreateDogExerciseModal />
+              </Flex>
             </GridItem>
             <GridItem
               colSpan={4}
@@ -86,10 +95,18 @@ const Dog = () => {
               boxShadow="md"
               rounded="md"
               bg="white"
+              overflowY="scroll"
             >
               <VStack spacing="30px" p="20px">
                 {dog.dogExercises.map((dogExe) => (
-                  <Flex key={dogExe.id} gap="50px">
+                  <Flex
+                    key={dogExe.id}
+                    gap="50px"
+                    boxShadow="md"
+                    rounded="md"
+                    bg="white"
+                    p={4}
+                  >
                     <Flex flexDir="column" justify="space-around">
                       <Heading size="sm">{dogExe.startDate}</Heading>
                       <Heading size="sm">{dogExe.endDate}</Heading>
@@ -97,10 +114,8 @@ const Dog = () => {
                     <Box w="100px" h="100px" bg="blue"></Box>
                   </Flex>
                 ))}
-                <CreateDogExerciseModal />
               </VStack>
             </GridItem>
-            {/* <GridItem colSpan={4} bg="tomato"></GridItem> */}
           </Grid>
         </Box>
       )}

@@ -9,6 +9,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { store } from "../store";
+import { GiDogHouse, GiJumpingDog } from "react-icons/gi";
 
 import NavItem from "../components/NavItem";
 
@@ -21,12 +22,14 @@ export default function Sidebar() {
       pos="sticky"
       p="5"
       h="80vh"
-      boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
-      borderTopRightRadius={navSize == "small" ? "15px" : "30px"}
-      borderBottomRightRadius={navSize == "small" ? "15px" : "30px"}
+      boxShadow="10px 4px 12px 0 rgba(186, 77, 57, 0.5)"
+      borderTopRightRadius="15px"
+      borderBottomRightRadius="15px"
       w={navSize == "small" ? "75px" : "200px"}
       flexDir="column"
       justifyContent="space-between"
+      bg="orange.200"
+      borderRight="2px solid brand.500"
     >
       <Flex
         p="5%"
@@ -54,8 +57,14 @@ export default function Sidebar() {
           navSize={navSize}
           title="Start"
           linkTo={"/dashboard"}
+          icon={GiDogHouse}
         ></NavItem>
-        <NavItem navSize={navSize} title="Exercises" linkTo={"exercises"} />
+        <NavItem
+          navSize={navSize}
+          title="Exercises"
+          linkTo={"exercises"}
+          icon={GiJumpingDog}
+        />
       </Flex>
 
       <Flex
@@ -76,7 +85,9 @@ export default function Sidebar() {
             <Heading as="h3" size="sm">
               {user.name} {user.firstName}
             </Heading>
-            <Text color="gray">{user.registerDate.slice()}</Text>
+            <Text color="gray">
+              Registered: {user.registerDate.substring(0, 10)}
+            </Text>
           </Flex>
         </Flex>
       </Flex>

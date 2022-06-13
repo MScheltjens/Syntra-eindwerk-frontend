@@ -7,6 +7,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  Box,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
@@ -19,11 +20,15 @@ export default function NavItem({ icon, title, active, navSize, linkTo }) {
       alignItems={navSize == "small" ? "center" : "flex-start"}
     >
       <Menu placement="right">
-        <ChakraLink
-          backgroundColor={active && "#AEC8CA"}
+        <Box
+          backgroundColor={active && "brand.400"}
           p={3}
           borderRadius={8}
-          _hover={{ textDecor: "none", backgroundColor: "#AEC8CA" }}
+          _hover={{
+            textDecor: "none",
+            backgroundColor: "orange.300",
+            opacity: "5",
+          }}
           w={navSize == "large" && "100%"}
         >
           <Link to={linkTo}>
@@ -40,7 +45,8 @@ export default function NavItem({ icon, title, active, navSize, linkTo }) {
               </Flex>
             </MenuButton>
           </Link>
-        </ChakraLink>
+        </Box>
+
         {/* <MenuList py={0} border="none" w={200} h={200} ml={5}>
           <NavHoverBox title={title} icon={icon} description={description} />
         </MenuList> */}

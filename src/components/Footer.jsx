@@ -3,7 +3,7 @@ import { Flex, Box } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <Flex bg="#AEC8CA" minHeight="50px">
+    <Flex bg="brand.200" minHeight="50px">
       Footer
     </Flex>
   );
