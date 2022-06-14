@@ -16,8 +16,8 @@ const DogGridExerciseList = ({ dogExercises }) => {
             <Heading size="sm">{dogExe.startDate}</Heading>
             <Heading size="sm">{dogExe.endDate}</Heading>
           </Flex>
-          <Box w="100px" h="100px" bg="blue">
-            <DogRadialBar />
+          <Box w="100px" h="100px">
+            <DogRadialBar dogExe={dogExe} />
           </Box>
         </Flex>
       ))}

@@ -1,50 +1,58 @@
-import {
-  RadialBarChart,
-  RadialBar,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { useState } from "react";
+import { Pie } from "@visx/shape";
+import { Group } from "@visx/group";
+import { Text } from "@visx/text";
 
-const data = {
-  name: "35-39",
-  uv: 8.22,
-  pv: 9800,
-  fill: "#82ca9d",
-};
+const DogRadialBar = ({ dogExe }) => {
+  // amounts for the bar
+  const totalAmount = dogExe.Amount;
+  const amountDone = dogExe.exerciseFollowUPs.reduce((acc, obj) => {
+    return acc + obj.done;
+  }, 0);
+  const exercises = [
+    { symbol: "DONE", amount: amountDone, color: "#fda94a" },
+    { symbol: "TOTAL", amount: totalAmount, color: "#048387" },
+  ];
 
-const style = {
-  top: "50%",
-  right: 0,
-  transform: "translate(0, -50%)",
-  lineHeight: "24px",
-};
+  // bar sizing and active state
+  const [active, setActive] = useState(null);
+  const width = 100;
+  const half = width / 2;
 
-const DogRadialBar = () => {
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <RadialBarChart
-        cx="50%"
-        cy="50%"
-        innerRadius="10%"
-        outerRadius="80%"
-        barSize={10}
-        data={data}
-      >
-        <RadialBar
-          minAngle={15}
-          label={{ position: "insideStart", fill: "#fff" }}
-          background
-          clockWise
-          dataKey="uv"
-        />
-        <Legend
-          iconSize={10}
-          layout="vertical"
-          verticalAlign="middle"
-          wrapperStyle={style}
-        />
-      </RadialBarChart>
-    </ResponsiveContainer>
+    <div>
+      <svg width={width} height={width}>
+        <Group top={half} left={half}>
+          <Pie
+            data={exercises}
+            pieValue={(data) => data.amount}
+            outerRadius={half}
+            innerRadius={({ data }) => {
+              const size = active && active.symbol == data.symbol ? 12 : 8;
+              return half - size;
+            }}
+            padAngle={0.01}
+          >
+            {(pie) => {
+              return pie.arcs.map((arc) => {
+                return (
+                  <g
+                    key={arc.data.symbol}
+                    onMouseEnter={() => setActive(arc.data)}
+                    onMouseLeave={() => setActive(null)}
+                  >
+                    <path d={pie.path(arc)} fill={arc.data.color}></path>
+                  </g>
+                );
+              });
+            }}
+          </Pie>
+          <Text textAnchor="middle" fill="white">
+            {`${amountDone} /  ${totalAmount}`}
+          </Text>
+        </Group>
+      </svg>
+    </div>
   );
 };
 

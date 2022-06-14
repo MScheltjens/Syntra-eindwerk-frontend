@@ -32,7 +32,7 @@ const ExerciseAccordionItem = ({ ex }) => {
             <Text>{ex.description}</Text>
           </Box>
 
-          <AspectRatio w="500px" ratio={1} rounded="xl" overflow="hidden">
+          <AspectRatio w="500px" ratio={4 / 3} rounded="xl" overflow="hidden">
             <iframe
               title="naruto"
               src="https://www.youtube.com/embed/QhBnZ6NPOY0"
