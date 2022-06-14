@@ -1,10 +1,9 @@
 import React from "react";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
-import { store } from "../store";
+
+import { Spinner, Center } from "@chakra-ui/react";
 
 const Exercises = () => {
-  const dogs = store.getState();
-  console.log(dogs);
   const {
     data: exes,
     isLoading,
@@ -12,7 +11,16 @@ const Exercises = () => {
     isError,
     error,
   } = useGetExercisesQuery();
-  return <div>exercises</div>;
+  return (
+    <div>
+      {isLoading && (
+        <Center mt="200px">
+          <Spinner />
+        </Center>
+      )}
+      {isSuccess && <p>{JSON.stringify(exes)}</p>}
+    </div>
+  );
 };
 
 export default Exercises;

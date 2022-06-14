@@ -12,7 +12,14 @@ import Exercises from "./Exercises";
 
 const DogCard = ({ dogPhoto, dogExe, name }) => {
   return (
-    <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      maxW="sm"
+      maxH="lg"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      boxShadow="lg"
+    >
       {/* <AspectRatio w="400px" ratio={4 / 3}> */}
       <Image src={dogPhoto} alt={dogPhoto} boxSize="200px" objectFit="cover" />
       {/* </AspectRatio> */}
