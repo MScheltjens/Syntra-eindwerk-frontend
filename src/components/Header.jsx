@@ -3,11 +3,15 @@ import { Center } from "@chakra-ui/react";
 
 const Header = () => {
   return (
-    <div>
-      <Center bg="brand.200" h="100px" color="white" height="15vh">
-        This is the Center
-      </Center>
-    </div>
+    <Center
+      bg="#048387"
+      h="100px"
+      color="white"
+      height="15vh"
+      borderBottom="5px solid #ff8802"
+    >
+      This is the Center
+    </Center>
   );
 };
 

@@ -15,10 +15,11 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
     <Box
       maxW="sm"
       maxH="lg"
-      borderWidth="1px"
-      borderRadius="lg"
+      border="2px solid 	#fda94a"
+      rounded="lg"
       overflow="hidden"
       boxShadow="lg"
+      bg="#04abab"
     >
       {/* <AspectRatio w="400px" ratio={4 / 3}> */}
       <Image src={dogPhoto} alt={dogPhoto} boxSize="200px" objectFit="cover" />

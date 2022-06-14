@@ -5,7 +5,7 @@ const DashboardLayout = () => {
   return (
     <Flex>
       <Sidebar />
-      <Box flexGrow={2} maxH="80vh" bg="orange.50">
+      <Box flexGrow={2} h="80vh" bg="#b6e0ec">
         <Outlet />
       </Box>
     </Flex>
