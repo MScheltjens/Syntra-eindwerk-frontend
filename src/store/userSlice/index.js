@@ -21,7 +21,7 @@ const userSlice = createSlice({
         isTrainer: payload.isTrainer,
       };
     },
-    logout: () => initialState,
+    logout: (state) => (state = initialState),
   },
 });
 

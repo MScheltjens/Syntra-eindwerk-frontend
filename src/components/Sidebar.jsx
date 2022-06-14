@@ -11,12 +11,21 @@ import {
 } from "@chakra-ui/react";
 import { store } from "../store";
 import { GiDogHouse, GiJumpingDog } from "react-icons/gi";
-
+import Alert from "./Alert";
 import NavItem from "../components/NavItem";
+import { useDispatch } from "react-redux";
+import { logout } from "../store/userSlice";
+import { useNavigate } from "react-router";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const user = store.getState().user;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout);
+    navigate("/");
+  };
 
   return (
     <Box bg="#b6e0ec">
@@ -91,10 +100,8 @@ export default function Sidebar() {
             </Flex>
           </Flex>
           <Divider display={navSize == "small" ? "none" : "flex"} />
-          <Button w="100%" mt={30}>
-            Log out
-          </Button>
         </Flex>
+        <Alert btnTitle="Log out" handleClick={handleLogout} />
       </Flex>
     </Box>
   );

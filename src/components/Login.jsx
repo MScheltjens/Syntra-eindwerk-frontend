@@ -25,6 +25,7 @@ import {
 } from "@chakra-ui/react";
 
 const Login = () => {
+  console.log(store.getState());
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
