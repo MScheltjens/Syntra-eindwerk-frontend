@@ -7,6 +7,7 @@ import {
   Avatar,
   Heading,
   Box,
+  Button,
 } from "@chakra-ui/react";
 import { store } from "../store";
 import { GiDogHouse, GiJumpingDog } from "react-icons/gi";
@@ -75,7 +76,7 @@ export default function Sidebar() {
         >
           <Divider display={navSize == "small" ? "none" : "flex"} />
           <Flex mt={4} align="center">
-            <Avatar size="sm" src="" />
+            <Avatar size="sm" src="" bg="orange.300" />
             <Flex
               flexDir="column"
               ml={4}
@@ -84,11 +85,15 @@ export default function Sidebar() {
               <Heading as="h3" size="sm">
                 {user.name} {user.firstName}
               </Heading>
-              <Text color="gray">
+              <Text color="gray" mb={30}>
                 Registered: {user.registerDate.substring(0, 10)}
               </Text>
             </Flex>
           </Flex>
+          <Divider display={navSize == "small" ? "none" : "flex"} />
+          <Button w="100%" mt={30}>
+            Log out
+          </Button>
         </Flex>
       </Flex>
     </Box>

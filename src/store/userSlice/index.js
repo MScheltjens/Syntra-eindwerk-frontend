@@ -7,6 +7,7 @@ const userSlice = createSlice({
     name: "",
     firstName: "",
     registerDate: "",
+    isTrainer: "",
   },
   reducers: {
     login: (state, { payload }) => {
@@ -17,8 +18,10 @@ const userSlice = createSlice({
         name: payload.name,
         firstName: payload.firstName,
         registerDate: payload.registerDate,
+        isTrainer: payload.isTrainer,
       };
     },
+    logout: () => initialState,
   },
 });
 

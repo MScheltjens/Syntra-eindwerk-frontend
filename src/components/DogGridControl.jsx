@@ -1,5 +1,5 @@
 import { Flex, Box, AspectRatio, VStack, Image } from "@chakra-ui/react";
-import AlertDelete from "./AlertDelete";
+import Alert from "./Alert";
 import EditDogModal from "./EditDogModal";
 import CreateDogExerciseModal from "./CreateDogExerciseModal";
 
@@ -18,7 +18,7 @@ const DogGridControl = ({ photo, handleDelete }) => {
       <VStack align="stretch">
         <CreateDogExerciseModal />
         <EditDogModal />
-        <AlertDelete handleDelete={handleDelete} />
+        <Alert handleClick={handleDelete} btnTitle="Delete" />
       </VStack>
     </Flex>
   );

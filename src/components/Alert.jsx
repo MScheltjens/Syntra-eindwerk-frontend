@@ -9,14 +9,14 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useRef } from "react";
-function AlertDelete({ handleDelete }) {
+function Alert({ btnTitle, alertHeader, handleClick }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
 
   return (
     <>
       <Button colorScheme="red" onClick={onOpen}>
-        Delete Customer
+        {btnTitle}
       </Button>
 
       <AlertDialog
@@ -27,19 +27,19 @@ function AlertDelete({ handleDelete }) {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete Customer
+              {alertHeader}
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
+              Are you sure you want to continue?
             </AlertDialogBody>
 
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme="red" onClick={handleDelete} ml={3}>
-                Delete
+              <Button colorScheme="red" onClick={handleClick} ml={3}>
+                {btnTitle}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -49,4 +49,4 @@ function AlertDelete({ handleDelete }) {
   );
 }
 
-export default AlertDelete;
+export default Alert;
