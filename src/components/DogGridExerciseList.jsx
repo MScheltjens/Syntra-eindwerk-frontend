@@ -1,4 +1,11 @@
-import { VStack, Flex, Heading, Box, StackDivider } from "@chakra-ui/react";
+import {
+  VStack,
+  Flex,
+  Heading,
+  Box,
+  StackDivider,
+  Text,
+} from "@chakra-ui/react";
 import DogRadialBar from "./DogRadialBar";
 import RadialBar from "./DogRadialBar";
 
@@ -13,8 +20,11 @@ const DogGridExerciseList = ({ dogExercises }) => {
       {dogExercises.map((dogExe) => (
         <Flex key={dogExe.id} justify="space-around" rounded="md">
           <Flex flexDir="column" justify="space-around">
-            <Heading size="sm">{dogExe.startDate}</Heading>
-            <Heading size="sm">{dogExe.endDate}</Heading>
+            <Heading size="sm">{dogExe.exercise.name}</Heading>
+            <Text size="sm">
+              {dogExe.startDate} - {dogExe.endDate}.
+            </Text>
+            {JSON.stringify(dogExe.exerciseFollowUPs)}
           </Flex>
           <Box w="100px" h="100px">
             <DogRadialBar dogExe={dogExe} />

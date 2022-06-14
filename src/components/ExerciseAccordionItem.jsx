@@ -15,7 +15,10 @@ const ExerciseAccordionItem = ({ ex }) => {
   return (
     <AccordionItem>
       <h2>
-        <AccordionButton _expanded={{ bg: "#04abab", color: "white" }}>
+        <AccordionButton
+          _expanded={{ bg: "#04abab", color: "white" }}
+          roundedTop="lg"
+        >
           <Box flex="1" textAlign="left">
             <Heading>{ex.name}</Heading>
           </Box>

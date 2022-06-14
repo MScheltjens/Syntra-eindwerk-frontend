@@ -88,7 +88,7 @@ const CreateDogExerciseModal = () => {
                 <Box>
                   <FormControl>
                     <FormLabel htmlFor="amount">Amount</FormLabel>
-                    <NumberInput max={50} min={10} onChange={handleChange}>
+                    <NumberInput max={50} min={1} onChange={handleChange}>
                       <NumberInputField id="amount" />
                       <NumberInputStepper>
                         <NumberIncrementStepper />

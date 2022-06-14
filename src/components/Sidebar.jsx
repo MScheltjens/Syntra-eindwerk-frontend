@@ -16,6 +16,7 @@ import NavItem from "../components/NavItem";
 import { useDispatch } from "react-redux";
 import { logout } from "../store/userSlice";
 import { useNavigate } from "react-router";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
@@ -36,7 +37,7 @@ export default function Sidebar() {
         boxShadow="5px 0 12px rgba(0, 0, 0, 0.5) "
         w={navSize == "small" ? "75px" : "200px"}
         flexDir="column"
-        justifyContent="space-between"
+        justifyContent="space-around"
         bg="#04abab"
         roundedRight="lg"
       >
@@ -47,15 +48,17 @@ export default function Sidebar() {
           alignItems={navSize == "small" ? "center" : "flex-start"}
           as="nav"
         >
-          <IconButton
+          {/* <IconButton
+            icon={<IoIosArrowBack />}
             background="none"
+            size="lg"
             mt={5}
             _hover={{ background: "none" }}
             onClick={() => {
               if (navSize == "small") changeNavSize("large");
               else changeNavSize("small");
             }}
-          />
+          /> */}
           {/* <NavItem
           navSize={navSize}
           title="Dashboard"
