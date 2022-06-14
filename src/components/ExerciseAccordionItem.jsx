@@ -15,16 +15,16 @@ const ExerciseAccordionItem = ({ ex }) => {
   return (
     <AccordionItem>
       <h2>
-        <AccordionButton>
+        <AccordionButton _expanded={{ bg: "#04abab", color: "white" }}>
           <Box flex="1" textAlign="left">
             <Heading>{ex.name}</Heading>
           </Box>
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel pb={4}>
+      <AccordionPanel pb={4} bgGradient="linear(to-b, #04abab, #b6e0ec)">
         <HStack
-          divider={<StackDivider borderColor="gray.200" />}
+          divider={<StackDivider borderColor="#fda94a" />}
           align="center"
           justify="space-around"
         >

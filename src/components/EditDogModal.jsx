@@ -20,7 +20,9 @@ const EditDogModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Edit Dog</Button>
+      <Button onClick={onOpen} colorScheme="orange">
+        Edit Dog
+      </Button>
 
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

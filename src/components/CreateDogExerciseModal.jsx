@@ -60,7 +60,9 @@ const CreateDogExerciseModal = () => {
 
   return (
     <>
-      <Button onClick={onOpen}>Add an exercise</Button>
+      <Button onClick={onOpen} colorScheme="green">
+        Add an exercise
+      </Button>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
