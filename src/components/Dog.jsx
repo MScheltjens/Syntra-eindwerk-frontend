@@ -1,33 +1,14 @@
-import {
-  Center,
-  Heading,
-  OrderedList,
-  ListItem,
-  Box,
-  List,
-  Button,
-  Flex,
-  VStack,
-  Image,
-  Grid,
-  GridItem,
-  Spacer,
-  Spinner,
-  AspectRatio,
-  useDisclosure,
-  StackDivider,
-} from "@chakra-ui/react";
-import AlertDelete from "./AlertDelete";
+import { Center, Box, Grid, GridItem, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router";
 import { useGetDogQuery, useDeleteDogMutation } from "../store/api/apiSlice";
-import { Link, Routes, Route, useNavigate } from "react-router-dom";
-import CreateDogExerciseModal from "./CreateDogExerciseModal";
-import EditDogModal from "./EditDogModal";
+import { useNavigate } from "react-router-dom";
+import DogGridHeader from "./DogGridHeader";
+import DogGridControl from "./DogGridControl";
+import DogGridExerciseList from "./DogGridExerciseList";
 
 const Dog = () => {
   const { dogId } = useParams();
   const navigate = useNavigate();
-
   const {
     data: dog,
     isLoading,
@@ -49,12 +30,12 @@ const Dog = () => {
         </Center>
       )}
       {isSuccess && (
-        <Box as="div" p={100}>
+        <Box as="div" p={50} overflowY="scroll">
           <Grid
-            h="500px"
             templateRows="repeat(5, 3fr)"
             templateColumns="repeat(6, 1fr)"
             gap={4}
+            maxH="inherit"
           >
             <GridItem
               rowSpan={1}
@@ -64,12 +45,7 @@ const Dog = () => {
               bg="#04abab"
               p={5}
             >
-              <Flex justify="space-between" align="center">
-                <Box>
-                  <Heading>{dog.name}</Heading>
-                  <Heading size="sm">{dog.birthDate}</Heading>
-                </Box>
-              </Flex>
+              <DogGridHeader name={dog.name} birthDate={dog.birthDate} />
             </GridItem>
             <GridItem
               rowSpan={4}
@@ -77,25 +53,9 @@ const Dog = () => {
               boxShadow="2xl"
               rounded="md"
               bg="#04abab"
-              overflow="hidden"
               p={5}
             >
-              <Flex flexDir="column" gap={50}>
-                <Box>
-                  <AspectRatio ratio={4 / 3}>
-                    {dog.photo ? (
-                      <Image src={dog.photo} objectFit="cover" rounded="md" />
-                    ) : (
-                      <p>No Image</p>
-                    )}
-                  </AspectRatio>
-                </Box>
-                <VStack align="stretch">
-                  <CreateDogExerciseModal />
-                  <EditDogModal />
-                  <AlertDelete handleDelete={handleDelete} />
-                </VStack>
-              </Flex>
+              <DogGridControl photo={dog.photo} handleDelete={handleDelete} />
             </GridItem>
             <GridItem
               colSpan={4}
@@ -106,22 +66,7 @@ const Dog = () => {
               bg="#04abab"
               overflowY="scroll"
             >
-              <VStack
-                p="20px"
-                divider={<StackDivider borderColor="#fda94a" />}
-                spacing={2}
-                align="stretch"
-              >
-                {dog.dogExercises.map((dogExe) => (
-                  <Flex key={dogExe.id} justify="space-around" rounded="md">
-                    <Flex flexDir="column" justify="space-around">
-                      <Heading size="sm">{dogExe.startDate}</Heading>
-                      <Heading size="sm">{dogExe.endDate}</Heading>
-                    </Flex>
-                    <Box w="100px" h="100px" bg="blue"></Box>
-                  </Flex>
-                ))}
-              </VStack>
+              <DogGridExerciseList dogExercises={dog.dogExercises} />
             </GridItem>
           </Grid>
         </Box>

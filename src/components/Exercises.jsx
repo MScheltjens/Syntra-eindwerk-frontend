@@ -1,7 +1,15 @@
 import React from "react";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
 
-import { Spinner, Center } from "@chakra-ui/react";
+import {
+  Spinner,
+  Center,
+  VStack,
+  StackDivider,
+  Box,
+  Accordion,
+} from "@chakra-ui/react";
+import ExerciseAccordionItem from "./ExerciseAccordionItem";
 
 const Exercises = () => {
   const {
@@ -18,7 +26,13 @@ const Exercises = () => {
           <Spinner />
         </Center>
       )}
-      {isSuccess && <p>{JSON.stringify(exes)}</p>}
+      {isSuccess && (
+        <Accordion allowMultiple p={50}>
+          {exes["hydra:member"].map((ex) => (
+            <ExerciseAccordionItem ex={ex} key={ex.id} />
+          ))}
+        </Accordion>
+      )}
     </div>
   );
 };
