@@ -13,8 +13,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
+          <Route index element={<Login />} />
           <Route path="dashboard/*" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dogs/:dogId/*" element={<Dog />}>
@@ -23,7 +22,7 @@ const App = () => {
             <Route path="exercises" element={<Exercises />} />
           </Route>
         </Route>
-        <Route path="*" element={<Login />} />
+        <Route path="*" element={<App />} />
       </Routes>
     </div>
   );

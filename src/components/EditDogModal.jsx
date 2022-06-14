@@ -27,7 +27,7 @@ const EditDogModal = () => {
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create your account</ModalHeader>
+          <ModalHeader>Change the details</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
@@ -36,8 +36,8 @@ const EditDogModal = () => {
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" />
+              <FormLabel>Photo</FormLabel>
+              <Input placeholder="Photo" />
             </FormControl>
           </ModalBody>
 

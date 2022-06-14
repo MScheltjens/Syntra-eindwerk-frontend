@@ -35,9 +35,7 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
           as="h4"
           lineHeight="tight"
           noOfLines={1}
-        >
-          <Text>Exercises: {dogExe}</Text>
-        </Box>
+        ></Box>
       </Box>
     </Box>
   );

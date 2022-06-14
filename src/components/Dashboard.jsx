@@ -35,13 +35,9 @@ const Dashboard = () => {
                 overflowY="scroll"
                 p="20px"
               >
-                {data.dogs.map(({ id, photo, dogExercises, name }) => (
+                {data.dogs.map(({ id, photo, name }) => (
                   <Link to={`dogs/${id}`} key={id}>
-                    <DogCard
-                      dogPhoto={photo}
-                      dogExe={dogExercises.length}
-                      name={name}
-                    />
+                    <DogCard dogPhoto={photo} name={name} />
                   </Link>
                 ))}
               </SimpleGrid>
