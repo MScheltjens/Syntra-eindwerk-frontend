@@ -1,16 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// const baseQuery = fetchBaseQuery({
-//   baseUrl: "http://localhost:8000/api/",
-//   credentials: "include",
-//   prepareHeaders: (headers, { getState }) => {
-//     const token = getState().user.data.token;
-//     if (token) {
-//       headers.set("Authorization", `Bearer ${token}`);
-//     }
-//     return headers;
-//   },
-// });
+const baseQuery = fetchBaseQuery({
+  baseUrl: "http://localhost:8000/api/",
+  // prepareHeaders: (headers, { getState }) => {
+  //   const token = getState().user.token;
+  //   if (token) {
+  //     headers.set("Authorization", `Bearer ${token}`);
+  //   }
+  //   return headers;
+  // },
+});
 
 // const baseQuery = fetchBaseQuery({
 //   baseUrl: "http://localhost:8000/api/",
@@ -28,7 +27,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   reducerPath: "dogTrainerApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
+  // baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
+  baseQuery,
   tagtypes: ["AllDogs"],
   endpoints: (builder) => ({
     getDogs: builder.query({

@@ -26,7 +26,7 @@ const Dashboard = () => {
           <Spinner />
         </Center>
       )}
-      {/* {isSuccess && <p>{JSON.stringify(dogs)}</p>} */}
+      {isSuccess && <pre>{JSON.stringify(dogs)}</pre>}
       <Center as="div" p={50} maxH="80vh">
         <Flex flexDir="column" align="center">
           <Flex flexDir="column" gap={30}>
