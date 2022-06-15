@@ -1,5 +1,5 @@
 import { useParams, Link, Routes, Route } from "react-router-dom";
-import { useGetUserQuery } from "../store/api/apiSlice";
+import { useGetDogsQuery } from "../store/api/apiSlice";
 import DogCard from "../components/DogCard";
 import { store } from "../store";
 import { useSelector } from "react-redux";
@@ -11,9 +11,13 @@ import { Spinner } from "@chakra-ui/react";
 const Dashboard = () => {
   const user = store.getState().user;
   console.log(user);
-  const { data, isLoading, isSuccess, isError, error } = useGetUserQuery(
-    user.id
-  );
+  const {
+    data: dogs,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetDogsQuery(user.id);
 
   return (
     <>
@@ -22,12 +26,12 @@ const Dashboard = () => {
           <Spinner />
         </Center>
       )}
-      {/* {user && <p>{JSON.stringify(user.dogs)}</p>} */}
+      {/* {isSuccess && <p>{JSON.stringify(dogs)}</p>} */}
       <Center as="div" p={50} maxH="80vh">
         <Flex flexDir="column" align="center">
           <Flex flexDir="column" gap={30}>
             {/* <Input placeholder="Search" value={value} onChange={handleFilter} /> */}
-            {data && (
+            {dogs && (
               <SimpleGrid
                 columns={[1, 3, 5]}
                 spacing="30px"
@@ -35,7 +39,7 @@ const Dashboard = () => {
                 overflowY="scroll"
                 p="20px"
               >
-                {data.dogs.map(({ id, photo, name }) => (
+                {dogs.map(({ id, photo, name }) => (
                   <Link to={`dogs/${id}`} key={id}>
                     <DogCard dogPhoto={photo} name={name} />
                   </Link>

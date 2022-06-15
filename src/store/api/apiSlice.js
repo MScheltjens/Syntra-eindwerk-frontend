@@ -29,11 +29,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "dogTrainerApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
-  tagtypes: ["Dog"],
+  tagtypes: ["AllDogs"],
   endpoints: (builder) => ({
-    getUser: builder.query({
-      query: (userId) => `/users/${userId}`,
-      providesTags: ["Dog"],
+    getDogs: builder.query({
+      query: (userId) => `/dogs?users=${userId}`,
+      providesTags: ["AllDogs"],
     }),
     getDog: builder.query({
       query: (dogId) => `/dogs/${dogId}`,
@@ -62,20 +62,20 @@ export const apiSlice = createApi({
         method: "POST",
         body: dog,
       }),
-      invalidatesTags: ["Dog"],
+      invalidatesTags: ["AllDogs"],
     }),
     deleteDog: builder.mutation({
       query: (dogId) => ({
         url: `/dogs/${dogId}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Dog"],
+      invalidatesTags: ["AllDogs"],
     }),
   }),
 });
 
 export const {
-  useGetUserQuery,
+  useGetDogsQuery,
   useGetDogQuery,
   useGetDogExerciseQuery,
   useGetExercisesQuery,

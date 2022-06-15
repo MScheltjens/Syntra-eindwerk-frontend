@@ -54,7 +54,7 @@ const CreateDogExerciseModal = () => {
     addDogExe({
       Amount: totalAmount,
       dog: `/api/dogs/${dogId}`,
-      exercise,
+      exercise: `api/exercises/${exercise}`,
     });
   };
 
@@ -69,15 +69,15 @@ const CreateDogExerciseModal = () => {
           <ModalHeader>Create an Exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {/* {JSON.stringify(exercises)} */}
+            {JSON.stringify(exercises)}
             <form onSubmit={handleSubmit}>
               <Flex justify="space-around">
                 <Box>
                   {exercises && (
                     <RadioGroup onChange={setExercise} value={exercise}>
                       <VStack direction="row">
-                        {exercises["hydra:member"].map((ex) => (
-                          <Radio value={ex["@id"]}>{ex.name}</Radio>
+                        {exercises.map((ex) => (
+                          <Radio value={ex.id}>{ex.name}</Radio>
                         ))}
                       </VStack>
                       {exercise}

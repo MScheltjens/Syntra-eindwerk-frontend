@@ -21,6 +21,7 @@ const Exercises = () => {
   } = useGetExercisesQuery();
   return (
     <div>
+      {/* {JSON.stringify(exes)} */}
       {isLoading && (
         <Center mt="200px">
           <Spinner />
@@ -28,7 +29,7 @@ const Exercises = () => {
       )}
       {isSuccess && (
         <Accordion allowMultiple p={50}>
-          {exes["hydra:member"].map((ex) => (
+          {exes.map((ex) => (
             <ExerciseAccordionItem ex={ex} key={ex.id} />
           ))}
         </Accordion>

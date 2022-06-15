@@ -6,8 +6,8 @@ import { Text } from "@visx/text";
 const DogRadialBar = ({ dogExe }) => {
   // amounts for the bar
   const totalAmount = dogExe.Amount;
-  const amountDone = dogExe.exerciseFollowUPs.reduce((acc, obj) => {
-    return acc + obj.done;
+  const amountDone = dogExe.exerciseRegistrations.reduce((acc, obj) => {
+    return acc + obj.amountDone;
   }, 0);
   const exercises = [
     { symbol: "DONE", amount: amountDone, color: "#fda94a" },
