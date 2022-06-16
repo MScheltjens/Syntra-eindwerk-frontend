@@ -40,7 +40,7 @@ const Login = () => {
     e.preventDefault();
     setHidden(true);
     await loginUser({
-      email,
+      username: email,
       password,
     });
   };
