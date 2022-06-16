@@ -98,7 +98,7 @@ export default function Sidebar() {
                 {user.name} {user.firstName}
               </Heading>
               <Text color="gray" mb={30}>
-                Registered: {user.registerDate.substring(0, 10)}
+                Registered: {user.registerDate.date}
               </Text>
             </Flex>
           </Flex>

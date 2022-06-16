@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useAddDogMutation } from "../store/api/apiSlice";
+import { store } from "../store";
 
 const AddDogModal = () => {
   const [dog, setDog] = useState({});
@@ -25,6 +26,7 @@ const AddDogModal = () => {
   const [hidden, setHidden] = useState(true);
 
   const handleSubmit = (e) => {
+    const userId = store.getState().user.id;
     e.preventDefault();
     setHidden(false);
     //still do updates when date and userRelatation is fixed!!
@@ -32,7 +34,7 @@ const AddDogModal = () => {
       name: dog.name,
       birthDate: dog.birthDate,
       photo: dog.photo,
-      user: "/api/users/1",
+      users: [`/api/users/${userId}`, `/api/users/3`],
     });
   };
 
@@ -81,7 +83,7 @@ const AddDogModal = () => {
                 <FormLabel>Boss</FormLabel>
                 <Input
                   placeholder="Add a trainer"
-                  onChange={(e) => setDog({ ...dog, user: "/api/users/1" })}
+                  // onChange={(e) => setDog({ ...dog, user: "/api/users/3" })}
                 />
               </FormControl>
               <Center mt={5}>
