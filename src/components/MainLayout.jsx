@@ -3,11 +3,12 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Box } from "@chakra-ui/react";
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
   return (
     <>
       <Header />
       <Outlet />
+      {children}
       <Footer />
     </>
   );

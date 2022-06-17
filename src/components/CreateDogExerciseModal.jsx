@@ -77,7 +77,9 @@ const CreateDogExerciseModal = () => {
                     <RadioGroup onChange={setExercise} value={exercise}>
                       <VStack direction="row">
                         {exercises.map((ex) => (
-                          <Radio value={ex.id}>{ex.name}</Radio>
+                          <Radio key={ex.id} value={ex.id}>
+                            {ex.name}
+                          </Radio>
                         ))}
                       </VStack>
                       {exercise}
