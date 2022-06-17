@@ -44,11 +44,11 @@ const Login = () => {
       password,
     });
   };
-  // save userdata in store and redirect to dashboard
+  // save userdata in store and redirect to dashboard if the user is a trainer
   useEffect(() => {
     if (data) {
       dispatch(login(data));
-      navigate(`/dashboard`);
+      data.isTrainer === false ? setHidden(false) : navigate("dashboard");
     }
     if (isError) {
       console.log(error);
