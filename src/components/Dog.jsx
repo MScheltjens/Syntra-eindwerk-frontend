@@ -46,7 +46,11 @@ const Dog = () => {
               bg="#04abab"
               p={5}
             >
-              <DogGridHeader name={dog.name} birthDate={dog.birthDate} />
+              <DogGridHeader
+                name={dog.name}
+                birthDate={dog.birthDate}
+                users={dog.users}
+              />
             </GridItem>
             <GridItem
               rowSpan={4}

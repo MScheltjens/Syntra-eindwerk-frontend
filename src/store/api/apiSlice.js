@@ -15,7 +15,8 @@ const baseQuery = fetchBaseQuery({
 export const apiSlice = createApi({
   reducerPath: "dogTrainerApi",
   baseQuery,
-  tagtypes: ["AllDogs"],
+  keepUnusedDataFor: 300,
+  tagtypes: ["AllDogs", "Dog"],
   endpoints: (builder) => ({
     getDogs: builder.query({
       query: (userId) => `/dogs?users=${userId}`,
