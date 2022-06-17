@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Dog from "./components/Dog";
 import Dashboard from "./components/Dashboard";
 import MainLayout from "./components/MainLayout";
+import RouteNotFound from "./components/RouteNotFound";
 const App = () => {
   return (
     <div>
@@ -22,7 +23,14 @@ const App = () => {
             <Route path="exercises" element={<Exercises />} />
           </Route>
         </Route>
-        {/* <Route path="*" element={<MainLayout />} /> */}
+        <Route
+          path="*"
+          element={
+            <MainLayout>
+              <RouteNotFound />
+            </MainLayout>
+          }
+        />
       </Routes>
     </div>
   );
