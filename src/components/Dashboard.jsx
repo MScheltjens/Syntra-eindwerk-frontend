@@ -27,13 +27,13 @@ const Dashboard = () => {
         </Center>
       )}
       {isSuccess && <pre>{JSON.stringify(dogs)}</pre>}
-      <Center as="div" p={50} maxH="80vh">
-        <Flex flexDir="column" align="center">
+      <Box as="div" p={50} maxH="80vh" display="flex" justifyContent="center">
+        <Flex flexDir="column" align="center" alignSelf="center">
           <Flex flexDir="column" gap={30}>
             {/* <Input placeholder="Search" value={value} onChange={handleFilter} /> */}
             {dogs && (
               <SimpleGrid
-                columns={[1, 3, 5]}
+                columns={[1, 2, 5]}
                 spacing="30px"
                 maxH="70vh"
                 overflowY="scroll"
@@ -49,7 +49,7 @@ const Dashboard = () => {
           </Flex>
           <AddDogModal />
         </Flex>
-      </Center>
+      </Box>
     </>
   );
 };

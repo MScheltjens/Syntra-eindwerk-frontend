@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Dog from "./components/Dog";
 import Dashboard from "./components/Dashboard";
 import MainLayout from "./components/MainLayout";
+import RouteNotFound from "./components/RouteNotFound";
 const App = () => {
   return (
     <div>
@@ -26,7 +27,7 @@ const App = () => {
           path="*"
           element={
             <MainLayout>
-              <Login />
+              <RouteNotFound />
             </MainLayout>
           }
         />
