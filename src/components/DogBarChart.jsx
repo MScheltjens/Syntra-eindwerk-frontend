@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { Heading } from "@chakra-ui/react";
 
 ChartJS.register(
   CategoryScale,
@@ -19,12 +20,16 @@ ChartJS.register(
   Legend
 );
 
-const DogBarChart = ({ dailyAmount }) => {
+const DogBarChart = ({ dogExe }) => {
   const options = {
     responsive: true,
     plugins: {
       legend: {
         position: "top",
+        display: false,
+      },
+      linearScale: {
+        display: true,
       },
       title: {
         display: true,
@@ -32,27 +37,26 @@ const DogBarChart = ({ dailyAmount }) => {
     },
   };
 
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
+  const labels = dogExe.exerciseRegistrations.map((ex) => ex.date);
 
   const data = {
     labels,
     datasets: [
       {
-        label: "Dataset 2",
-        data: [10, 30, 50],
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: "Daily Exercises",
+        data: dogExe.exerciseRegistrations.map((ex) => ex.amountDone),
+        backgroundColor: "rgba(4, 131, 135, .6)",
+        borderWidth: 2,
+        borderColor: "rgba(4, 131, 135)",
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+
+  return (
+    <>
+      <Bar options={options} data={data} />
+    </>
+  );
 };
 
 export default DogBarChart;

@@ -6,9 +6,9 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import DogBarChart from "./DogBarChart";
+
 import DogRadialBar from "./DogRadialBar";
-import DogBarChartModal from "./DogBarChartModal";
+import DogChartModal from "./DogChartModal";
 
 const DogGridExerciseList = ({ dogExercises }) => {
   return (
@@ -32,7 +32,7 @@ const DogGridExerciseList = ({ dogExercises }) => {
             <DogRadialBar dogExe={dogExe} />
             {/* <DogBarChart /> */}
           </Box>
-          <DogBarChartModal />
+          <DogChartModal dogExe={dogExe} />
         </Flex>
       ))}
     </VStack>
