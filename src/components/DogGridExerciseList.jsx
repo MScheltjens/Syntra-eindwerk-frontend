@@ -6,8 +6,6 @@ import {
   StackDivider,
   Text,
 } from "@chakra-ui/react";
-import DogRadialBar from "./DogRadialBar";
-import RadialBar from "./DogRadialBar";
 
 const DogGridExerciseList = ({ dogExercises }) => {
   return (
@@ -27,9 +25,9 @@ const DogGridExerciseList = ({ dogExercises }) => {
             </Text>
             {/* {JSON.stringify(dogExe)} */}
           </Flex>
-          <Box w="100px" h="100px">
-            <DogRadialBar dogExe={dogExe} />
-          </Box>
+          {/* <Box w="100px" h="100px"> */}
+          {/* <DogRadialBar dogExe={dogExe} /> */}
+          {/* </Box> */}
         </Flex>
       ))}
     </VStack>
