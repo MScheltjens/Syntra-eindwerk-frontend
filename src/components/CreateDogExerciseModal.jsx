@@ -52,7 +52,7 @@ const CreateDogExerciseModal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addDogExe({
-      Amount: totalAmount,
+      Amount: dailyAmount * 1,
       dog: `/api/dogs/${dogId}`,
       exercise: `api/exercises/${exercise}`,
     });

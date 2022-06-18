@@ -9,6 +9,7 @@ import Dog from "./components/Dog";
 import Dashboard from "./components/Dashboard";
 import MainLayout from "./components/MainLayout";
 import RouteNotFound from "./components/RouteNotFound";
+import DogBarChart from "./components/DogBarChart";
 const App = () => {
   return (
     <div>
