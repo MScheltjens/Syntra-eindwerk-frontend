@@ -9,6 +9,7 @@ const userSlice = createSlice({
     registerDate: "",
     isTrainer: "",
     token: "",
+    isLoggedIn: false,
   },
   reducers: {
     login: (state, { payload }) => {
@@ -21,9 +22,13 @@ const userSlice = createSlice({
         registerDate: payload.registerDate,
         isTrainer: payload.isTrainer,
         token: payload.token,
+        isLoggedIn: true,
       };
     },
-    logout: (state) => (state = initialState),
+    logout: (state, actions) => {
+      console.log(actions);
+      return { ...state, isLoggedIn: false };
+    },
   },
 });
 

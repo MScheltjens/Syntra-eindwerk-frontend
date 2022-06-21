@@ -10,18 +10,21 @@ import Dashboard from "./components/Dashboard";
 import MainLayout from "./components/MainLayout";
 import RouteNotFound from "./components/RouteNotFound";
 import DogBarChart from "./components/DogBarChart";
+import PrivateRoutes from "./Routes/PrivateRoutes";
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Login />} />
-          <Route path="dashboard/*" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="dogs/:dogId/*" element={<Dog />}>
-              {" "}
+          <Route element={<PrivateRoutes />}>
+            <Route path="dashboard/*" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dogs/:dogId/*" element={<Dog />}>
+                {" "}
+              </Route>
+              <Route path="exercises" element={<Exercises />} />
             </Route>
-            <Route path="exercises" element={<Exercises />} />
           </Route>
         </Route>
         <Route

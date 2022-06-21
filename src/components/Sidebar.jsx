@@ -23,8 +23,9 @@ export default function Sidebar() {
   const user = store.getState().user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
-    dispatch(logout);
+    dispatch(logout(""));
     navigate("/");
   };
 
