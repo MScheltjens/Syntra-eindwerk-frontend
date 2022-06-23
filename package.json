@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.2.0",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.9.1",
     "@reduxjs/toolkit": "^1.8.2",
     "@visx/visx": "^2.10.1",
     "axios": "^0.27.2",
@@ -20,11 +21,13 @@
     "react": "^18.0.0",
     "react-chartjs-2": "^4.2.0",
     "react-dom": "^18.0.0",
+    "react-hook-form": "^7.32.2",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "recharts": "^2.1.10"
+    "recharts": "^2.1.10",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.0",

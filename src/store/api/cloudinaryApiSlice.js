@@ -12,6 +12,9 @@ export const cloudinaryApiSlice = createApi({
         method: "POST",
         body,
       }),
+      transformResponse: (response, meta, arg) => {
+        return response;
+      },
     }),
   }),
 });

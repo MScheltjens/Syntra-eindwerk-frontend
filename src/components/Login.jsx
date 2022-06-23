@@ -25,6 +25,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import Logo from "../logoComponent/Logo";
+import { DateSchema } from "yup";
 
 const Login = () => {
   console.log(store.getState());
