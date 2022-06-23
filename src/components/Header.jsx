@@ -1,5 +1,6 @@
 import React from "react";
-import { Center } from "@chakra-ui/react";
+import { Center, Box } from "@chakra-ui/react";
+import Logo from "../logoComponent/Logo";
 
 const Header = () => {
   return (
@@ -10,7 +11,9 @@ const Header = () => {
       height="15vh"
       borderBottom="5px solid #ff8802"
     >
-      This is the Center
+      <Box>
+        <Logo maxWidth="300px" />
+      </Box>
     </Center>
   );
 };

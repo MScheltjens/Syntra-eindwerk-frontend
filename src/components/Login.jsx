@@ -22,7 +22,9 @@ import {
   FormHelperText,
   InputRightElement,
   Spinner,
+  Image,
 } from "@chakra-ui/react";
+import Logo from "../logoComponent/Logo";
 
 const Login = () => {
   console.log(store.getState());
@@ -44,6 +46,7 @@ const Login = () => {
       password,
     });
   };
+
   // save userdata in store and redirect to dashboard if the user is a trainer
   useEffect(() => {
     if (data) {
@@ -60,7 +63,7 @@ const Login = () => {
       flexDirection="column"
       width="100wh"
       height="80vh"
-      backgroundColor="gray.200"
+      backgroundColor="fff"
       justifyContent="center"
       alignItems="center"
     >
@@ -70,8 +73,7 @@ const Login = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar bg="teal.500" />
-        <Heading color="teal.400">Welcome</Heading>
+        <Logo />
         <Spinner
           thickness="4px"
           speed="0.65s"
