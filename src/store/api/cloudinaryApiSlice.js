@@ -16,7 +16,10 @@ export const cloudinaryApiSlice = createApi({
         return response;
       },
     }),
+    getImage: builder.query({
+      query: (publicId) => `/resources/${publicId}`,
+    }),
   }),
 });
 
-export const { useUploadImageMutation } = cloudinaryApiSlice;
+export const { useUploadImageMutation, useGetImageQuery } = cloudinaryApiSlice;

@@ -21,7 +21,6 @@ import { useAddDogMutation } from "../store/api/apiSlice";
 import { store } from "../store";
 import { useUploadImageMutation } from "../store/api/cloudinaryApiSlice";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 
 const AddDogModal = () => {
@@ -37,17 +36,20 @@ const AddDogModal = () => {
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [addDog, { data, isError, error }] = useAddDogMutation();
-  const [uploadImage, { data, isError, error }] = useUploadImageMutation();
+  const [uploadImage] = useUploadImageMutation();
   const initialRef = useRef(null);
 
-  const onSubmit = (data, e) => {
+  const onSubmit = async (data, e) => {
     console.log(data.ownerPhoto[0]);
     const userId = store.getState().user.id;
     setHidden(false);
+
+    // send the photos to cloudinary
     const formData = new FormData();
     formData.append("file", data.ownerPhoto[0]);
     formData.append("upload_preset", "a8nsnfhz");
-    uploadImage(formData);
+    const response = await uploadImage(formData);
+    console.log(response.data);
   };
   return (
     <>
@@ -115,7 +117,6 @@ const AddDogModal = () => {
                 Submit
               </Button>
             </form>
-            {data && <div>{JSON.sgringify(data)}</div>}
           </ModalBody>
         </ModalContent>
       </Modal>
