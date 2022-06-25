@@ -9,6 +9,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import Exercises from "./Exercises";
+import CloudinarySDK from "../cloudinarySDK/CloudinarySDK";
 
 const DogCard = ({ dogPhoto, dogExe, name }) => {
   return (
@@ -22,7 +23,7 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
       bg="#04abab"
     >
       {/* <AspectRatio w="400px" ratio={4 / 3}> */}
-      <Image src={dogPhoto} alt={dogPhoto} boxSize="200px" objectFit="cover" />
+      <CloudinarySDK publicId={dogPhoto} />
       {/* </AspectRatio> */}
       <Box p="6">
         <Box display="flex" alignItems="baseline">

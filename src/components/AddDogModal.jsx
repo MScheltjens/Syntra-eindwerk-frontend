@@ -37,19 +37,37 @@ const AddDogModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [addDog, { data, isError, error }] = useAddDogMutation();
   const [uploadImage] = useUploadImageMutation();
+  const [addDog, { data, error, isError }] = useAddDogMutation();
   const initialRef = useRef(null);
 
-  const onSubmit = async (data, e) => {
-    console.log(data.ownerPhoto[0]);
+  const onSubmit = async (data) => {
+    console.log(data);
     const userId = store.getState().user.id;
     setHidden(false);
 
     // send the photos to cloudinary
     const formData = new FormData();
-    formData.append("file", data.ownerPhoto[0]);
-    formData.append("upload_preset", "a8nsnfhz");
+    formData.append("file", data.photo[0]);
+    formData.append("upload_preset", "a8nsnfhz"); //put in .env
     const response = await uploadImage(formData);
-    console.log(response.data);
+    const publicId = response.data.public_id;
+
+    //collect formdata and post to api
+    addDog({
+      name: data.name,
+      birthDate: data.birthDate,
+      photo: publicId,
+      users: [
+        `/api/users/${userId}`,
+        {
+          email: data.ownerEmail,
+          password: data.ownerPass,
+          name: data.ownerName,
+          firstName: data.ownerFirstName,
+          photo: data.ownerPhoto,
+        },
+      ],
+    });
   };
   return (
     <>
@@ -84,24 +102,26 @@ const AddDogModal = () => {
                 />
                 <FormLabel htmlFor="photo">Photo</FormLabel>
                 <Input id="photo" type="file" {...register("photo")} />
-                <Heading size="m">Owner</Heading>
+
+                <Heading size="md" mt={5} mb={5}>
+                  Owner
+                </Heading>
                 <FormLabel htmlFor="ownerFirstName">First Name</FormLabel>
                 <Input id="ownerFirstName" {...register("ownerFirstName")} />
+
                 <FormLabel htmlFor="ownerName">Name</FormLabel>
                 <Input id="ownerName" {...register("ownerName")} />
-                <FormLabel htmlFor="ownerName">First Name</FormLabel>
-                <FormLabel htmlFor="ownerPhoto">Photo</FormLabel>
-                <Input
-                  id="ownerPhoto"
-                  type="file"
-                  {...register("ownerPhoto")}
-                />
-
                 <FormLabel htmlFor="ownerEmail">Email</FormLabel>
                 <Input
                   id="ownerEmail"
+                  type="email"
                   {...register("ownerEmail")}
-                  onChange={() => setOwnerPhoto(e.target.files[0])}
+                />
+                <FormLabel htmlFor="ownerPass">Password</FormLabel>
+                <Input
+                  id="ownerPass"
+                  type="password"
+                  {...register("ownerPass")}
                 />
 
                 <FormErrorMessage>

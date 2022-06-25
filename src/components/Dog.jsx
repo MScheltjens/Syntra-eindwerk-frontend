@@ -31,7 +31,7 @@ const Dog = () => {
       )}
       {isSuccess && (
         <Box as="div" p={50} overflowY="scroll">
-          {/* {JSON.stringify(dog)} */}
+          {JSON.stringify(dog)}
           <Grid
             templateRows="repeat(5, 3fr)"
             templateColumns="repeat(6, 1fr)"
