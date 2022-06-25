@@ -23,9 +23,10 @@ import {
   InputRightElement,
   Spinner,
   Image,
+  Img,
+  Text,
+  Icon,
 } from "@chakra-ui/react";
-import Logo from "./logoComponent/Logo";
-import { DateSchema } from "yup";
 
 const Login = () => {
   console.log(store.getState());
@@ -65,16 +66,15 @@ const Login = () => {
       width="100wh"
       height="80vh"
       backgroundColor="fff"
-      justifyContent="center"
       alignItems="center"
     >
       <Stack
         flexDir="column"
-        mb="2"
         justifyContent="center"
         alignItems="center"
+        height="90%"
       >
-        <Logo />
+        <Img src="src/assets/DogGo.png" maxWidth="500px" />
         <Spinner
           thickness="4px"
           speed="0.65s"
@@ -101,6 +101,7 @@ const Login = () => {
                     type="email"
                     placeholder="email address"
                     onChange={(e) => setEmail(e.target.value)}
+                    bg="white"
                   />
                 </InputGroup>
               </FormControl>
@@ -128,6 +129,7 @@ const Login = () => {
                 variant="solid"
                 colorScheme="teal"
                 width="full"
+                bg="#ff8802"
               >
                 Login
               </Button>

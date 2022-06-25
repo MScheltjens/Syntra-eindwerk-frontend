@@ -27,30 +27,30 @@ const Dashboard = () => {
           <Spinner />
         </Center>
       )}
-      {isSuccess && <pre>{JSON.stringify(dogs)}</pre>}
-      <Box as="div" p={50} maxH="80vh" display="flex" justifyContent="center">
-        <Flex flexDir="column" align="center" alignSelf="center">
-          <Flex flexDir="column" gap={30}>
-            {/* <Input placeholder="Search" value={value} onChange={handleFilter} /> */}
-            {dogs && (
-              <SimpleGrid
-                columns={[1, 2, 5]}
-                spacing="30px"
-                maxH="70vh"
-                overflowY="scroll"
-                p="20px"
-              >
-                {dogs.map(({ id, photo, name }) => (
-                  <Link to={`dogs/${id}`} key={id}>
-                    <DogCard dogPhoto={photo} name={name} />
-                  </Link>
-                ))}
-              </SimpleGrid>
-            )}
+      {isSuccess && (
+        <Box as="div" p={50} maxH="80vh" display="flex" justifyContent="center">
+          <Flex flexDir="column" align="center" alignSelf="center">
+            <Flex flexDir="column" gap={30}>
+              {dogs && (
+                <SimpleGrid
+                  columns={[1, 2, 5]}
+                  spacing="30px"
+                  maxH="70vh"
+                  overflowY="scroll"
+                  p="20px"
+                >
+                  {dogs.map(({ id, photo, name }) => (
+                    <Link to={`dogs/${id}`} key={id}>
+                      <DogCard dogPhoto={photo} name={name} />
+                    </Link>
+                  ))}
+                </SimpleGrid>
+              )}
+            </Flex>
+            <AddDogModal dogs={dogs} />
           </Flex>
-          <AddDogModal dogs={dogs} />
-        </Flex>
-      </Box>
+        </Box>
+      )}
     </>
   );
 };

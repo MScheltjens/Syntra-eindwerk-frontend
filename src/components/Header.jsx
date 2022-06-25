@@ -1,6 +1,7 @@
 import React from "react";
-import { Center, Box } from "@chakra-ui/react";
+import { Center, Box, Icon } from "@chakra-ui/react";
 import Logo from "./logoComponent/Logo";
+import { FaPaw } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -11,9 +12,7 @@ const Header = () => {
       height="15vh"
       borderBottom="5px solid #ff8802"
     >
-      <Box>
-        <Logo maxWidth="300px" />
-      </Box>
+      <Icon as={FaPaw} boxSize="50px" color="#ff8802" />
     </Center>
   );
 };
