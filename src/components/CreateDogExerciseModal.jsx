@@ -7,12 +7,9 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Input,
   FormControl,
   useDisclosure,
   FormLabel,
-  Radio,
-  VStack,
   Flex,
   Box,
   Heading,
@@ -21,16 +18,27 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  RadioGroup,
+  FormErrorMessage,
+  Select,
+  Center,
 } from "@chakra-ui/react";
+import ExerciseAccordionItem from "./accordion/ExerciseAccordionItem";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAddDogExeMutation } from "../store/api/apiSlice";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
+import { SearchIcon } from "@chakra-ui/icons";
+import { useForm } from "react-hook-form";
+import { createStructuredSelector } from "reselect";
 
 const CreateDogExerciseModal = () => {
+  const [selected, setSelected] = useState();
+  const [dailyAmount, setDailyAmount] = useState();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
+  const accRef = useRef();
+
   const {
     data: exercises,
     isLoading,
@@ -39,22 +47,20 @@ const CreateDogExerciseModal = () => {
     error,
   } = useGetExercisesQuery();
   const [addDogExe] = useAddDogExeMutation();
-  const [exercise, setExercise] = useState("");
-  const [dailyAmount, setDailyAmount] = useState(10);
-  const [totalAmount, setTotalAmount] = useState("");
+  const [totalAmount, setTotalAmount] = useState();
   const { dogId } = useParams();
 
   const handleChange = (e) => {
-    setDailyAmount(e);
+    // setDailyAmount(e);
     setTotalAmount(e * 7);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addDogExe({
-      Amount: dailyAmount * 1,
+      Amount: totalAmount,
       dog: `/api/dogs/${dogId}`,
-      exercise: `api/exercises/${exercise}`,
+      exercise: `/api/exercises/${selected}`,
     });
   };
 
@@ -63,54 +69,80 @@ const CreateDogExerciseModal = () => {
       <Button onClick={onOpen} colorScheme="green">
         Add an exercise
       </Button>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="2xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create an Exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {JSON.stringify(exercises)}
             <form onSubmit={handleSubmit}>
-              <Flex justify="space-around">
-                <Box>
-                  {exercises && (
-                    <RadioGroup onChange={setExercise} value={exercise}>
-                      <VStack direction="row">
-                        {exercises.map((ex) => (
-                          <Radio key={ex.id} value={ex.id}>
-                            {ex.name}
-                          </Radio>
-                        ))}
-                      </VStack>
-                      {exercise}
-                    </RadioGroup>
-                  )}
-                </Box>
+              <FormControl>
+                <Flex flexDir="column" justify="space-around" minHeight="400px">
+                  <Box>
+                    <Heading size="lg" mb="20px">
+                      Maak keuze uit een oefening
+                    </Heading>
+                    <FormLabel htmlFor="name"></FormLabel>
+                    <Select
+                      placeholder="Choose an exercise"
+                      name="select"
+                      onChange={(e) => setSelected(e.target.value)}
+                    >
+                      {isSuccess &&
+                        exercises.map((ex) => {
+                          return (
+                            <option key={ex.id} value={ex.id}>
+                              {ex.name} ---- {ex.AddedAt} ----{ex.id}
+                            </option>
+                          );
+                        })}
+                    </Select>
+                    <p>{selected}</p>
+                  </Box>
 
-                <Box>
-                  <FormControl>
-                    <FormLabel htmlFor="amount">Amount</FormLabel>
-                    <NumberInput max={50} min={1} onChange={handleChange}>
-                      <NumberInputField id="amount" />
+                  <Box>
+                    <Heading size="lg" mb="20px">
+                      Dagelijks aantal
+                    </Heading>
+                    <FormLabel htmlFor="dailyAmount"></FormLabel>
+                    <NumberInput
+                      defaultValue={15}
+                      min={1}
+                      max={100}
+                      id="dailyAmount"
+                      onChange={handleChange}
+                    >
+                      <NumberInputField />
                       <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                  </FormControl>
+                    <p>{dailyAmount}</p>
+                  </Box>
 
-                  <Heading size="m">Total weekly amount</Heading>
-                  <p>{totalAmount}</p>
-                </Box>
-              </Flex>
-              <Button colorScheme="blue" mr={3} type="submit">
-                Save
-              </Button>
+                  <Flex gap="20px">
+                    <Heading>Total this week:</Heading>
+                    <Heading>{totalAmount}</Heading>
+                  </Flex>
+                </Flex>
+              </FormControl>
+              <Center>
+                <Button mt={4} colorScheme="teal" type="submit">
+                  Submit
+                </Button>
+                <Button onClick={onClose} mt={4}>
+                  Cancel
+                </Button>
+              </Center>
             </form>
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

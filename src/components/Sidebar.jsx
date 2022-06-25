@@ -49,23 +49,6 @@ export default function Sidebar() {
           alignItems={navSize == "small" ? "center" : "flex-start"}
           as="nav"
         >
-          {/* <IconButton
-            icon={<IoIosArrowBack />}
-            background="none"
-            size="lg"
-            mt={5}
-            _hover={{ background: "none" }}
-            onClick={() => {
-              if (navSize == "small") changeNavSize("large");
-              else changeNavSize("small");
-            }}
-          /> */}
-          {/* <NavItem
-          navSize={navSize}
-          title="Dashboard"
-          description="This is the description for the dashboard."
-        /> */}
-
           <NavItem
             navSize={navSize}
             title="Start"

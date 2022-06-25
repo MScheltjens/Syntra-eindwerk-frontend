@@ -16,8 +16,9 @@ export const store = configureStore({
     [exerciseSlice.name]: exerciseSlice.reducer,
   }),
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      .concat(authApiSlice.middleware)
-      .concat(apiSlice.middleware)
-      .concat(cloudinaryApiSlice.middleware),
+    getDefaultMiddleware().concat(
+      authApiSlice.middleware,
+      apiSlice.middleware,
+      cloudinaryApiSlice.middleware
+    ),
 });

@@ -11,7 +11,7 @@ import {
   StackDivider,
 } from "@chakra-ui/react";
 
-const ExerciseAccordionItem = ({ ex }) => {
+const ExerciseAccordionItem = ({ ex, modalVersion }) => {
   return (
     <AccordionItem>
       <h2>
@@ -27,7 +27,12 @@ const ExerciseAccordionItem = ({ ex }) => {
       </h2>
       <AccordionPanel pb={4} bgGradient="linear(to-b, #04abab, #b6e0ec)">
         <HStack
-          divider={<StackDivider borderColor="#fda94a" />}
+          divider={
+            <StackDivider
+              borderColor="#fda94a"
+              display={modalVersion ? "hidden" : ""}
+            />
+          }
           align="center"
           justify="space-around"
         >
@@ -35,7 +40,13 @@ const ExerciseAccordionItem = ({ ex }) => {
             <Text>{ex.description}</Text>
           </Box>
 
-          <AspectRatio w="500px" ratio={4 / 3} rounded="xl" overflow="hidden">
+          <AspectRatio
+            w="500px"
+            ratio={4 / 3}
+            rounded="xl"
+            overflow="hidden"
+            display={modalVersion ? "none" : ""}
+          >
             <iframe
               title="naruto"
               src="https://www.youtube.com/embed/QhBnZ6NPOY0"
