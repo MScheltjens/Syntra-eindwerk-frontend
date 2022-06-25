@@ -7,7 +7,7 @@ import { SimpleGrid, Box, Center, Input, Flex, Fade } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import AddDogModal from "./AddDogModal";
 import { Spinner } from "@chakra-ui/react";
-import CloudinarySDK from "../cloudinarySDK/CloudinarySDK";
+import CloudinarySDK from "./cloudinarySDK/CloudinarySDK";
 
 const Dashboard = () => {
   const user = store.getState().user;
@@ -48,7 +48,7 @@ const Dashboard = () => {
               </SimpleGrid>
             )}
           </Flex>
-          <AddDogModal />
+          <AddDogModal dogs={dogs} />
         </Flex>
       </Box>
     </>

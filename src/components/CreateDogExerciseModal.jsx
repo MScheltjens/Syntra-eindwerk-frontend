@@ -11,8 +11,6 @@ import {
   FormControl,
   useDisclosure,
   FormLabel,
-  Radio,
-  VStack,
   Flex,
   Box,
   Heading,
@@ -21,16 +19,23 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  RadioGroup,
+  InputGroup,
+  Accordion,
+  InputLeftElement,
 } from "@chakra-ui/react";
-import { useEffect, useRef, useState } from "react";
+import ExerciseAccordionItem from "./accordion/ExerciseAccordionItem";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAddDogExeMutation } from "../store/api/apiSlice";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
+import SearchBar from "./SearchBar/SearchBar";
+import { SearchIcon } from "@chakra-ui/icons";
 
 const CreateDogExerciseModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
+  const inputRef = useRef("");
+
   const {
     data: exercises,
     isLoading,
@@ -43,6 +48,10 @@ const CreateDogExerciseModal = () => {
   const [dailyAmount, setDailyAmount] = useState(10);
   const [totalAmount, setTotalAmount] = useState("");
   const { dogId } = useParams();
+
+  const getSearchTerm = () => {
+    console.log(inputRef);
+  };
 
   const handleChange = (e) => {
     setDailyAmount(e);
@@ -63,34 +72,56 @@ const CreateDogExerciseModal = () => {
       <Button onClick={onOpen} colorScheme="green">
         Add an exercise
       </Button>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="2xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Create an Exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {JSON.stringify(exercises)}
+            {/* {JSON.stringify(exercises)} */}
             <form onSubmit={handleSubmit}>
               <Flex justify="space-around">
-                <Box>
+                <Box maxH="600px" overflow="hidden" overflowY="auto">
                   {exercises && (
-                    <RadioGroup onChange={setExercise} value={exercise}>
-                      <VStack direction="row">
-                        {exercises.map((ex) => (
-                          <Radio key={ex.id} value={ex.id}>
-                            {ex.name}
-                          </Radio>
-                        ))}
-                      </VStack>
-                      {exercise}
-                    </RadioGroup>
+                    <Accordion allowToggle p={50} maxWidth="400px">
+                      {exercises.map((ex) => (
+                        <ExerciseAccordionItem
+                          ex={ex}
+                          key={ex.id}
+                          modalVersion={true}
+                        />
+                      ))}
+                    </Accordion>
                   )}
                 </Box>
 
-                <Box>
-                  <FormControl>
-                    <FormLabel htmlFor="amount">Amount</FormLabel>
-                    <NumberInput max={50} min={1} onChange={handleChange}>
+                <Flex flexDir="column" justify="space-around" align="center">
+                  <InputGroup>
+                    <InputLeftElement
+                      ref={inputRef}
+                      pointerEvents="none"
+                      children={<SearchIcon color="gray.300" />}
+                      onChange={getSearchTerm}
+                    />
+                    <Input type="text" placeholder="search exercise" />
+                  </InputGroup>
+                  <FormControl display="flex" flexDir="column" align="center">
+                    <Heading size="md" mb="20px">
+                      Enter a daily count!
+                    </Heading>
+                    <FormLabel htmlFor="amount"></FormLabel>
+                    <NumberInput
+                      max={50}
+                      min={1}
+                      mb="30px"
+                      onChange={handleChange}
+                      size="lg"
+                    >
                       <NumberInputField id="amount" />
                       <NumberInputStepper>
                         <NumberIncrementStepper />
@@ -98,10 +129,15 @@ const CreateDogExerciseModal = () => {
                       </NumberInputStepper>
                     </NumberInput>
                   </FormControl>
-
-                  <Heading size="m">Total weekly amount</Heading>
-                  <p>{totalAmount}</p>
-                </Box>
+                  <Box>
+                    <Heading size="md" mb="30px">
+                      Total weekly amount
+                    </Heading>
+                    <Heading size="3xl" textAlign="center">
+                      {totalAmount}
+                    </Heading>
+                  </Box>
+                </Flex>
               </Flex>
               <Button colorScheme="blue" mr={3} type="submit">
                 Save

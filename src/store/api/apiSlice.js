@@ -58,6 +58,9 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["AllDogs"],
     }),
+    getOwnersAlfabetical: builder.query({
+      query: () => "/users?isTrainer=false&order%5Bname%5D=asc",
+    }),
   }),
 });
 
@@ -67,6 +70,7 @@ export const {
   useGetDogExerciseQuery,
   useGetExercisesQuery,
   useGetExerciseQuery,
+  useGetOwnersAlfabeticalQuery,
   useAddDogExeMutation,
   useAddDogMutation,
   useDeleteDogMutation,

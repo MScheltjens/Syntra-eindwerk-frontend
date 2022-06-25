@@ -1,6 +1,6 @@
 import React from "react";
 import { Center, Box } from "@chakra-ui/react";
-import Logo from "../logoComponent/Logo";
+import Logo from "./logoComponent/Logo";
 
 const Header = () => {
   return (

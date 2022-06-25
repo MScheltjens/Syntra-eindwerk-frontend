@@ -9,7 +9,7 @@ import {
   Box,
   Accordion,
 } from "@chakra-ui/react";
-import ExerciseAccordionItem from "./ExerciseAccordionItem";
+import ExerciseAccordionItem from "./Accordion/ExerciseAccordionItem";
 
 const Exercises = () => {
   const {
@@ -30,7 +30,7 @@ const Exercises = () => {
       {isSuccess && (
         <Accordion allowMultiple p={50}>
           {exes.map((ex) => (
-            <ExerciseAccordionItem ex={ex} key={ex.id} />
+            <ExerciseAccordionItem ex={ex} key={ex.id} modalVersion={false} />
           ))}
         </Accordion>
       )}

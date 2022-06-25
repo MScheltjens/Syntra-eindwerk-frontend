@@ -3,7 +3,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   useDisclosure,
@@ -11,44 +10,48 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Center,
-  Spinner,
   FormErrorMessage,
   Heading,
+  Text,
+  InputGroup,
+  InputLeftElement,
+  Box,
 } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import { useAddDogMutation } from "../store/api/apiSlice";
+import {
+  useAddDogMutation,
+  useGetOwnersAlfabeticalQuery,
+} from "../store/api/apiSlice";
 import { store } from "../store";
 import { useUploadImageMutation } from "../store/api/cloudinaryApiSlice";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import SearchBar from "./SearchBar/SearchBar";
 
-const AddDogModal = () => {
+const AddDogModal = ({ dogs }) => {
   const [hidden, setHidden] = useState(true);
   const [imageData, setImageData] = useState("");
+  const [selection, setSelection] = useState("");
 
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm({
-    mode: "onBlur",
-  });
+  } = useForm({ mode: "onBlur" });
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [addDog, { data, isError, error }] = useAddDogMutation();
   const [uploadImage] = useUploadImageMutation();
   const [addDog, { data, error, isError }] = useAddDogMutation();
+  const { data: owners } = useGetOwnersAlfabeticalQuery();
   const initialRef = useRef(null);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const userId = store.getState().user.id;
     setHidden(false);
 
     // send the photos to cloudinary
     const formData = new FormData();
     formData.append("file", data.photo[0]);
-    formData.append("upload_preset", "a8nsnfhz"); //put in .env
+    formData.append("upload_preset", "a8nsnfhz");
     const response = await uploadImage(formData);
     const publicId = response.data.public_id;
 
@@ -57,16 +60,7 @@ const AddDogModal = () => {
       name: data.name,
       birthDate: data.birthDate,
       photo: publicId,
-      users: [
-        `/api/users/${userId}`,
-        {
-          email: data.ownerEmail,
-          password: data.ownerPass,
-          name: data.ownerName,
-          firstName: data.ownerFirstName,
-          photo: data.ownerPhoto,
-        },
-      ],
+      users: [`/api/users/${userId}`, `/api/users/${selection}`],
     });
   };
   return (
@@ -82,7 +76,7 @@ const AddDogModal = () => {
           <ModalBody pb={6}>
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormControl isInvalid={errors.name}>
-                <FormLabel htmlFor="name">First name</FormLabel>
+                <FormLabel htmlFor="name">Name</FormLabel>
                 <Input
                   id="name"
                   placeholder="name"
@@ -103,39 +97,36 @@ const AddDogModal = () => {
                 <FormLabel htmlFor="photo">Photo</FormLabel>
                 <Input id="photo" type="file" {...register("photo")} />
 
-                <Heading size="md" mt={5} mb={5}>
+                <Heading size="md" mt={5} mb={2}>
                   Owner
                 </Heading>
-                <FormLabel htmlFor="ownerFirstName">First Name</FormLabel>
-                <Input id="ownerFirstName" {...register("ownerFirstName")} />
+                <Text mb={5}>
+                  Make sure the owner is registered on the app!
+                </Text>
 
-                <FormLabel htmlFor="ownerName">Name</FormLabel>
-                <Input id="ownerName" {...register("ownerName")} />
-                <FormLabel htmlFor="ownerEmail">Email</FormLabel>
-                <Input
-                  id="ownerEmail"
-                  type="email"
-                  {...register("ownerEmail")}
-                />
-                <FormLabel htmlFor="ownerPass">Password</FormLabel>
-                <Input
-                  id="ownerPass"
-                  type="password"
-                  {...register("ownerPass")}
+                <SearchBar
+                  data={owners}
+                  placeholder={"find an already registered owner"}
+                  setSelection={setSelection}
                 />
 
                 <FormErrorMessage>
                   {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button>
+              <Box display="flex" justifyContent="space-around">
+                <Button
+                  mt={4}
+                  colorScheme="teal"
+                  isLoading={isSubmitting}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+                <Button mt={4} onClick={onClose}>
+                  Cancel
+                </Button>
+              </Box>
             </form>
           </ModalBody>
         </ModalContent>
