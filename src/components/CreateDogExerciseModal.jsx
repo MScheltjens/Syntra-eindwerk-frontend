@@ -7,7 +7,6 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  Input,
   FormControl,
   useDisclosure,
   FormLabel,
@@ -19,9 +18,9 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  InputGroup,
-  Accordion,
-  InputLeftElement,
+  FormErrorMessage,
+  Select,
+  Center,
 } from "@chakra-ui/react";
 import ExerciseAccordionItem from "./accordion/ExerciseAccordionItem";
 import { useEffect, useRef, useState } from "react";
@@ -29,11 +28,16 @@ import { Link, useParams } from "react-router-dom";
 import { useAddDogExeMutation } from "../store/api/apiSlice";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
 import { SearchIcon } from "@chakra-ui/icons";
+import { useForm } from "react-hook-form";
+import { createStructuredSelector } from "reselect";
 
 const CreateDogExerciseModal = () => {
+  const [selected, setSelected] = useState();
+  const [dailyAmount, setDailyAmount] = useState();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
-  const exRef = useRef();
+  const accRef = useRef();
 
   const {
     data: exercises,
@@ -43,29 +47,20 @@ const CreateDogExerciseModal = () => {
     error,
   } = useGetExercisesQuery();
   const [addDogExe] = useAddDogExeMutation();
-  const [exercise, setExercise] = useState("");
-  const [dailyAmount, setDailyAmount] = useState(10);
-  const [totalAmount, setTotalAmount] = useState("");
-  const [searchWord, setSearchWord] = useState("");
-  const [open, setOpen] = useState(false);
+  const [totalAmount, setTotalAmount] = useState();
   const { dogId } = useParams();
 
   const handleChange = (e) => {
-    setDailyAmount(e);
+    // setDailyAmount(e);
     setTotalAmount(e * 7);
   };
-
-  const filteredExercises = exercises.filter((ex) =>
-    ex.name.includes(searchWord)
-  );
-  console.log(filteredExercises);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addDogExe({
-      Amount: dailyAmount * 1,
+      Amount: totalAmount,
       dog: `/api/dogs/${dogId}`,
-      exercise: `api/exercises/${exercise}`,
+      exercise: `/api/exercises/${selected}`,
     });
   };
 
@@ -86,76 +81,68 @@ const CreateDogExerciseModal = () => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <form onSubmit={handleSubmit}>
-              <Flex justify="space-around">
-                <Box
-                  maxH="600px"
-                  overflow="hidden"
-                  overflowY="auto"
-                  height="500px"
-                >
-                  {exercises && (
-                    <Accordion allowToggle p={0} maxWidth="400px" ref={exRef}>
-                      {filteredExercises.map((ex) => (
-                        <ExerciseAccordionItem
-                          ex={ex}
-                          key={ex.id}
-                          modalVersion={true}
-                          onClick={() => setOpen(!isOpen)}
-                        />
-                      ))}
-                    </Accordion>
-                  )}
-                </Box>
-
-                <Flex flexDir="column" justify="space-around" align="center">
-                  <InputGroup>
-                    <InputLeftElement
-                      pointerEvents="none"
-                      children={<SearchIcon color="gray.300" />}
-                    />
-                    <Input
-                      type="text"
-                      placeholder="search exercise"
-                      onChange={(e) => setSearchWord(e.target.value)}
-                    />
-                  </InputGroup>
-                  <FormControl display="flex" flexDir="column" align="center">
-                    <Heading size="md" mb="20px">
-                      Enter a daily count!
+              <FormControl>
+                <Flex flexDir="column" justify="space-around" minHeight="400px">
+                  <Box>
+                    <Heading size="lg" mb="20px">
+                      Maak keuze uit een oefening
                     </Heading>
-                    <FormLabel htmlFor="amount"></FormLabel>
-                    <NumberInput
-                      max={50}
-                      min={1}
-                      mb="30px"
-                      onChange={handleChange}
-                      size="lg"
+                    <FormLabel htmlFor="name"></FormLabel>
+                    <Select
+                      placeholder="Choose an exercise"
+                      name="select"
+                      onChange={(e) => setSelected(e.target.value)}
                     >
-                      <NumberInputField id="amount" />
+                      {isSuccess &&
+                        exercises.map((ex) => {
+                          return (
+                            <option key={ex.id} value={ex.id}>
+                              {ex.name} ---- {ex.AddedAt} ----{ex.id}
+                            </option>
+                          );
+                        })}
+                    </Select>
+                    <p>{selected}</p>
+                  </Box>
+
+                  <Box>
+                    <Heading size="lg" mb="20px">
+                      Dagelijks aantal
+                    </Heading>
+                    <FormLabel htmlFor="dailyAmount"></FormLabel>
+                    <NumberInput
+                      defaultValue={15}
+                      min={1}
+                      max={100}
+                      id="dailyAmount"
+                      onChange={handleChange}
+                    >
+                      <NumberInputField />
                       <NumberInputStepper>
                         <NumberIncrementStepper />
                         <NumberDecrementStepper />
                       </NumberInputStepper>
                     </NumberInput>
-                  </FormControl>
-                  <Box>
-                    <Heading size="md" mb="30px">
-                      Total weekly amount
-                    </Heading>
-                    <Heading size="3xl" textAlign="center">
-                      {totalAmount}
-                    </Heading>
+                    <p>{dailyAmount}</p>
                   </Box>
+
+                  <Flex gap="20px">
+                    <Heading>Total this week:</Heading>
+                    <Heading>{totalAmount}</Heading>
+                  </Flex>
                 </Flex>
-              </Flex>
-              <Button colorScheme="blue" mr={3} type="submit">
-                Save
-              </Button>
+              </FormControl>
+              <Center>
+                <Button mt={4} colorScheme="teal" type="submit">
+                  Submit
+                </Button>
+                <Button onClick={onClose} mt={4}>
+                  Cancel
+                </Button>
+              </Center>
             </form>
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>

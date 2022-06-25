@@ -5,6 +5,7 @@ import { Transformation } from "@cloudinary/url-gen";
 import { thumbnail, scale } from "@cloudinary/url-gen/actions/resize";
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
+import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
 
 const CloudinarySDK = ({ publicId }) => {
   const cld = new Cloudinary({
