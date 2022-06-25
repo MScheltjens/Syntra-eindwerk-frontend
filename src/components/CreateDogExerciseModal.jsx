@@ -24,17 +24,16 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import ExerciseAccordionItem from "./accordion/ExerciseAccordionItem";
-import { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useAddDogExeMutation } from "../store/api/apiSlice";
 import { useGetExercisesQuery } from "../store/api/apiSlice";
-import SearchBar from "./SearchBar/SearchBar";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const CreateDogExerciseModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
-  const inputRef = useRef("");
+  const exRef = useRef();
 
   const {
     data: exercises,
@@ -47,16 +46,19 @@ const CreateDogExerciseModal = () => {
   const [exercise, setExercise] = useState("");
   const [dailyAmount, setDailyAmount] = useState(10);
   const [totalAmount, setTotalAmount] = useState("");
+  const [searchWord, setSearchWord] = useState("");
+  const [open, setOpen] = useState(false);
   const { dogId } = useParams();
-
-  const getSearchTerm = () => {
-    console.log(inputRef);
-  };
 
   const handleChange = (e) => {
     setDailyAmount(e);
     setTotalAmount(e * 7);
   };
+
+  const filteredExercises = exercises.filter((ex) =>
+    ex.name.includes(searchWord)
+  );
+  console.log(filteredExercises);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,17 +85,22 @@ const CreateDogExerciseModal = () => {
           <ModalHeader>Create an Exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            {/* {JSON.stringify(exercises)} */}
             <form onSubmit={handleSubmit}>
               <Flex justify="space-around">
-                <Box maxH="600px" overflow="hidden" overflowY="auto">
+                <Box
+                  maxH="600px"
+                  overflow="hidden"
+                  overflowY="auto"
+                  height="500px"
+                >
                   {exercises && (
-                    <Accordion allowToggle p={50} maxWidth="400px">
-                      {exercises.map((ex) => (
+                    <Accordion allowToggle p={0} maxWidth="400px" ref={exRef}>
+                      {filteredExercises.map((ex) => (
                         <ExerciseAccordionItem
                           ex={ex}
                           key={ex.id}
                           modalVersion={true}
+                          onClick={() => setOpen(!isOpen)}
                         />
                       ))}
                     </Accordion>
@@ -103,12 +110,14 @@ const CreateDogExerciseModal = () => {
                 <Flex flexDir="column" justify="space-around" align="center">
                   <InputGroup>
                     <InputLeftElement
-                      ref={inputRef}
                       pointerEvents="none"
                       children={<SearchIcon color="gray.300" />}
-                      onChange={getSearchTerm}
                     />
-                    <Input type="text" placeholder="search exercise" />
+                    <Input
+                      type="text"
+                      placeholder="search exercise"
+                      onChange={(e) => setSearchWord(e.target.value)}
+                    />
                   </InputGroup>
                   <FormControl display="flex" flexDir="column" align="center">
                     <Heading size="md" mb="20px">

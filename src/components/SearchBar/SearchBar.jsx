@@ -9,12 +9,13 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { none } from "@cloudinary/url-gen/qualifiers/progressive";
 
-const SearchBar = ({ placeholder, data, setSelection }) => {
+const SearchBar = ({ placeholder, data, setSelection, setSelectEx }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = (e) => {
     const searchWord = e.target.value;
     const newFilter = data.filter((value) => {
+      // nog ombouwen zodat door heel de objecten geloopt kan worden (object.entries)
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 

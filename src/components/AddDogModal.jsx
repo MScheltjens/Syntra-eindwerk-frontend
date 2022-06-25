@@ -114,7 +114,7 @@ const AddDogModal = ({ dogs }) => {
                   {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
-              <Box display="flex" justifyContent="space-around">
+              <Box display="flex">
                 <Button
                   mt={4}
                   colorScheme="teal"
