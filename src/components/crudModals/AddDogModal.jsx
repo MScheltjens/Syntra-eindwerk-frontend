@@ -22,11 +22,11 @@ import { useEffect, useRef, useState } from "react";
 import {
   useAddDogMutation,
   useGetOwnersAlfabeticalQuery,
-} from "../store/api/apiSlice";
-import { store } from "../store";
-import { useUploadImageMutation } from "../store/api/cloudinaryApiSlice";
+} from "../../store/api/apiSlice";
+import { store } from "../../store";
+import { useUploadImageMutation } from "../../store/api/cloudinaryApiSlice";
 import { useForm } from "react-hook-form";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchBar from "../SearchBar/SearchBar";
 
 const AddDogModal = ({ dogs }) => {
   const [hidden, setHidden] = useState(true);
@@ -65,7 +65,13 @@ const AddDogModal = ({ dogs }) => {
   };
   return (
     <>
-      <Button onClick={onOpen} h="100%" boxShadow="lg" maxWidth="200px">
+      <Button
+        onClick={onOpen}
+        h="100%"
+        boxShadow="lg"
+        maxWidth="200px"
+        border="2px solid  #fda94a"
+      >
         Add a dog
       </Button>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>

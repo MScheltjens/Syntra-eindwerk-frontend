@@ -1,13 +1,10 @@
-import { useParams, Link, Routes, Route } from "react-router-dom";
-import { useGetDogsQuery } from "../store/api/apiSlice";
-import DogCard from "../components/DogCard";
-import { store } from "../store";
-import { useSelector } from "react-redux";
-import { SimpleGrid, Box, Center, Input, Flex, Fade } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import AddDogModal from "./AddDogModal";
+import { Link } from "react-router-dom";
+import { useGetDogsQuery } from "../../store/api/apiSlice";
+import DogCard from "../DogComponents/DogCard";
+import { store } from "../../store";
+import { SimpleGrid, Box, Center, Flex } from "@chakra-ui/react";
+import AddDogModal from "../crudModals/AddDogModal";
 import { Spinner } from "@chakra-ui/react";
-import CloudinarySDK from "./cloudinarySDK/CloudinarySDK";
 
 const Dashboard = () => {
   const user = store.getState().user;
@@ -27,6 +24,7 @@ const Dashboard = () => {
           <Spinner />
         </Center>
       )}
+
       {isSuccess && (
         <Box as="div" p={50} maxH="80vh" display="flex" justifyContent="center">
           <Flex flexDir="column" align="center" alignSelf="center">
@@ -44,10 +42,10 @@ const Dashboard = () => {
                       <DogCard dogPhoto={photo} name={name} />
                     </Link>
                   ))}
+                  <AddDogModal dogs={dogs} />
                 </SimpleGrid>
               )}
             </Flex>
-            <AddDogModal dogs={dogs} />
           </Flex>
         </Box>
       )}

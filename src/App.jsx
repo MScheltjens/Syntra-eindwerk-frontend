@@ -1,16 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import DashboardLayout from "./components/DashboardLayout";
-import Home from "./components/Home";
-import "./App.css";
-
-import Exercises from "./components/Exercises";
-import Login from "./components/Login";
-import Dog from "./components/Dog";
-import Dashboard from "./components/Dashboard";
-import MainLayout from "./components/MainLayout";
-import RouteNotFound from "./components/RouteNotFound";
-import DogBarChart from "./components/DogBarChart";
+import DashboardLayout from "./components/Layouts/DashboardLayout";
+import Exercises from "./components/exerciseComponents/Exercises";
+import Login from "./components/login/Login";
+import Dog from "./components/DogComponents/Dog";
+import Dashboard from "./components/dashboard/Dashboard";
+import MainLayout from "./components/Layouts/MainLayout";
+import RouteNotFound from "./components/404/RouteNotFound";
 import PrivateRoutes from "./Routes/PrivateRoutes";
+import "./App.css";
 const App = () => {
   return (
     <div>

@@ -1,8 +1,8 @@
-import { Flex, Box, AspectRatio, VStack, Image } from "@chakra-ui/react";
-import Alert from "./Alert";
-import EditDogModal from "./EditDogModal";
-import CreateDogExerciseModal from "./CreateDogExerciseModal";
-import CloudinarySDK from "./cloudinarySDK/CloudinarySDK";
+import { Flex, Box, VStack } from "@chakra-ui/react";
+import Alert from "../Alert";
+import EditDogModal from "../crudModals/EditDogModal";
+import CreateDogExerciseModal from "../crudModals/CreateDogExerciseModal";
+import CloudinarySDK from "../cloudinarySDK/CloudinarySDK";
 
 const DogGridControl = ({ photo, handleDelete }) => {
   return (

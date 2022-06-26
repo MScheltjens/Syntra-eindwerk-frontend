@@ -18,18 +18,13 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  FormErrorMessage,
   Select,
   Center,
 } from "@chakra-ui/react";
-import ExerciseAccordionItem from "./accordion/ExerciseAccordionItem";
-import { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useAddDogExeMutation } from "../store/api/apiSlice";
-import { useGetExercisesQuery } from "../store/api/apiSlice";
-import { SearchIcon } from "@chakra-ui/icons";
-import { useForm } from "react-hook-form";
-import { createStructuredSelector } from "reselect";
+import { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useAddDogExeMutation } from "../../store/api/apiSlice";
+import { useGetExercisesQuery } from "../../store/api/apiSlice";
 
 const CreateDogExerciseModal = () => {
   const [selected, setSelected] = useState();

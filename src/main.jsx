@@ -10,7 +10,7 @@ import dogTrainerTheme from "./styles/dogTrainerTheme";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ChakraProvider resetCSS theme={dogTrainerTheme}>
+    <ChakraProvider theme={dogTrainerTheme}>
       <Provider store={store}>
         <Router>
           <Routes>

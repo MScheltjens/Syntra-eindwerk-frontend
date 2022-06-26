@@ -1,6 +1,6 @@
 import { Center, Box, Grid, GridItem, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router";
-import { useGetDogQuery, useDeleteDogMutation } from "../store/api/apiSlice";
+import { useGetDogQuery, useDeleteDogMutation } from "../../store/api/apiSlice";
 import { useNavigate } from "react-router-dom";
 import DogGridHeader from "./DogGridHeader";
 import DogGridControl from "./DogGridControl";

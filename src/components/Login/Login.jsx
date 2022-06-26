@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import { store } from "../store";
-import { useLoginUserMutation } from "../store/api/authApiSlice";
-import userSlice, { login } from "../store/userSlice";
-import { addDogs } from "../store/dogsSlice";
-import { addExercises } from "../store/exerciseSlice";
+import { store } from "../../store";
+import { useLoginUserMutation } from "../../store/api/authApiSlice";
+import { login } from "../../store/userSlice";
+
 import {
   Flex,
-  Heading,
-  Input,
   Button,
   InputGroup,
   Stack,
   InputLeftElement,
-  chakra,
   Box,
-  Link,
-  Avatar,
   FormControl,
   FormHelperText,
   InputRightElement,
   Spinner,
-  Image,
   Img,
-  Text,
-  Icon,
 } from "@chakra-ui/react";
 
 const Login = () => {

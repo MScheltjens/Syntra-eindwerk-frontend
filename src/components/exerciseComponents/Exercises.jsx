@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetExercisesQuery } from "../store/api/apiSlice";
+import { useGetExercisesQuery } from "../../store/api/apiSlice";
 
 import {
   Spinner,
@@ -9,7 +9,7 @@ import {
   Box,
   Accordion,
 } from "@chakra-ui/react";
-import ExerciseAccordionItem from "./Accordion/ExerciseAccordionItem";
+import ExerciseAccordionItem from "../Accordion/ExerciseAccordionItem";
 
 const Exercises = () => {
   const {

@@ -9,6 +9,10 @@ const dogTrainerTheme = extendTheme({
       400: "#BA4D39",
       500: "#060302",
     },
+    fonts: {
+      heading: "Montserat",
+      body: "Inter",
+    },
   },
 });
 

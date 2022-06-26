@@ -9,14 +9,13 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
-import { store } from "../store";
+import { store } from "../../store";
 import { GiDogHouse, GiJumpingDog } from "react-icons/gi";
-import Alert from "./Alert";
-import NavItem from "../components/NavItem";
+import Alert from "../Alert";
+import NavItem from "../SideNavigation/NavItem";
 import { useDispatch } from "react-redux";
-import { logout } from "../store/userSlice";
+import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router";
-import { IoIosArrowBack } from "react-icons/io";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");

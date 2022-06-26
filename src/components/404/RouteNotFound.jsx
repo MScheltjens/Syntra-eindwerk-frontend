@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { store } from "../store";
+import { store } from "../../store";
 
 const RouteNotFound = () => {
   const navigate = useNavigate();

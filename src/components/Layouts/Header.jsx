@@ -1,6 +1,4 @@
-import React from "react";
-import { Center, Box, Icon } from "@chakra-ui/react";
-import Logo from "./logoComponent/Logo";
+import { Center, Box, Icon, Img } from "@chakra-ui/react";
 import { FaPaw } from "react-icons/fa";
 
 const Header = () => {
@@ -13,6 +11,7 @@ const Header = () => {
       borderBottom="5px solid #ff8802"
     >
       <Icon as={FaPaw} boxSize="50px" color="#ff8802" />
+      <Img src="src/assets/doggotransparent.png"></Img>
     </Center>
   );
 };

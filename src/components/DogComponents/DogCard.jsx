@@ -1,28 +1,25 @@
 import React from "react";
-import {
-  Box,
-  Image,
-  Badge,
-  AspectRatio,
-  Center,
-  Text,
-  Heading,
-} from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 
-import CloudinarySDK from "./cloudinarySDK/CloudinarySDK";
+import CloudinarySDK from "../../components/cloudinarySDK/CloudinarySDK";
+import { scale } from "@cloudinary/url-gen/actions/resize";
 
 const DogCard = ({ dogPhoto, dogExe, name }) => {
   return (
     <Box
       maxW="sm"
       maxH="lg"
-      border="2px solid 	#fda94a"
+      border="2px solid #fda94a"
       rounded="lg"
       overflow="hidden"
       boxShadow="lg"
       bg="#04abab"
+      _hover={{
+        bg: "#fda94a",
+        color: " white",
+      }}
     >
-      <Box>
+      <Box borderBottom="2px solid #fda94a">
         <CloudinarySDK publicId={dogPhoto} />
       </Box>
 
