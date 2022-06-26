@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { store } from "../../store";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://wdev2.be/fs_mathias/eindwerk/api",
+  baseUrl: import.meta.env.VITE_API_BASEURL,
   prepareHeaders: (headers, { getState }) => {
     const token = getState().user.token;
     if (token) {
@@ -61,6 +60,18 @@ export const apiSlice = createApi({
     getOwnersAlfabetical: builder.query({
       query: () => "/users?isTrainer=false&order%5Bname%5D=asc",
     }),
+    editDog: builder.mutation({
+      query: ({ dogId, body }) => ({
+        url: `/dogs/${dogId}`,
+        method: "PATCH",
+        headers: {
+          accept: "application/json",
+          "Content-type": "application/merge-patch+json",
+        },
+        body,
+      }),
+      invalidatesTags: ["Dog"],
+    }),
   }),
 });
 
@@ -74,4 +85,5 @@ export const {
   useAddDogExeMutation,
   useAddDogMutation,
   useDeleteDogMutation,
+  useEditDogMutation,
 } = apiSlice;

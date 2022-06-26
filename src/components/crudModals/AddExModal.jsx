@@ -69,10 +69,9 @@ const AddDogModal = ({ dogs }) => {
         onClick={onOpen}
         h="50px"
         boxShadow="lg"
-        bg="#fda94a"
         w="200px"
         border="2px solid  #fda94a"
-        _hover={{ bg: "#048387", color: " white" }}
+        _hover={{ bg: "#fda94a", color: " white" }}
         _focus={{ boxShadow: "outline" }}
       >
         Add a dog

@@ -9,7 +9,7 @@ const DogGridControl = ({ photo }) => {
     <Flex flexDir="column" gap={50}>
       <Box maxH="100%">
         {photo ? (
-          <Box maxWidth={500} maxH={300} overflow="hidden" rounded="md">
+          <Box maxWidth={500} maxH={500} overflow="hidden" rounded="md">
             <CloudinarySDK publicId={photo} />
           </Box>
         ) : (

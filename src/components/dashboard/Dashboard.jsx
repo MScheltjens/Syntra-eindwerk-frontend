@@ -2,50 +2,62 @@ import { Link } from "react-router-dom";
 import { useGetDogsQuery } from "../../store/api/apiSlice";
 import DogCard from "../DogComponents/DogCard";
 import { store } from "../../store";
-import { SimpleGrid, Box, Center, Flex } from "@chakra-ui/react";
+import {
+  SimpleGrid,
+  Box,
+  Center,
+  Flex,
+  InputGroup,
+  Input,
+  InputLeftElement,
+} from "@chakra-ui/react";
 import AddDogModal from "../crudModals/AddDogModal";
 import { Spinner } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import DashboardGrid from "./DashboardGrid";
 
 const Dashboard = () => {
+  const [input, setInput] = useState("");
   const user = store.getState().user;
   console.log(user);
-  const {
-    data: dogs,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetDogsQuery(user.id);
+  const { data, isLoading, isSuccess, isError, error } = useGetDogsQuery(
+    user.id
+  );
+
+  const filterDogs = (data) => {
+    return data.filter(
+      (dog) => dog.name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    );
+  };
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    setInput(e.target.value);
+  };
 
   return (
     <>
       {isLoading && (
-        <Center mt="200px">
+        <Flex justify="center" align="center" mt="200px" w="75vw">
           <Spinner />
-        </Center>
+        </Flex>
       )}
 
-      {isSuccess && (
-        <Box as="div" p={50} maxH="80vh" display="flex" justifyContent="center">
+      {data && (
+        <Box as="div" p="20px" maxH="80vh" justifyContent="center">
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<SearchIcon color="gray.300" />}
+            />
+            <Input type="text" onChange={handleChange} />
+          </InputGroup>
           <Flex flexDir="column" align="center" alignSelf="center">
             <Flex flexDir="column" gap={30}>
-              {dogs && (
-                <SimpleGrid
-                  columns={[1, 2, 5]}
-                  spacing="30px"
-                  maxH="70vh"
-                  overflowY="scroll"
-                  p="20px"
-                >
-                  {dogs.map(({ id, photo, name }) => (
-                    <Link to={`dogs/${id}`} key={id}>
-                      <DogCard dogPhoto={photo} name={name} />
-                    </Link>
-                  ))}
-                  <AddDogModal dogs={dogs} />
-                </SimpleGrid>
-              )}
+              <DashboardGrid dogs={filterDogs(data)} />
             </Flex>
+            <AddDogModal dogs={data} />
           </Flex>
         </Box>
       )}

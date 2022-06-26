@@ -97,7 +97,6 @@ const CreateDogExerciseModal = () => {
                           );
                         })}
                     </Select>
-                    <p>{selected}</p>
                   </Box>
 
                   <Box>
@@ -106,7 +105,6 @@ const CreateDogExerciseModal = () => {
                     </Heading>
                     <FormLabel htmlFor="dailyAmount"></FormLabel>
                     <NumberInput
-                      defaultValue={15}
                       min={1}
                       max={100}
                       id="dailyAmount"

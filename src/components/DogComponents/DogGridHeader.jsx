@@ -6,10 +6,14 @@ import Alert from "../Alert";
 const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
   return (
     <Flex justify="space-between" align="center">
-      {/* {JSON.stringify(users)} */}
+      {JSON.stringify(users)}
       <Box>
-        <Heading>{name}</Heading>
-        <Heading size="sm">{birthDate}</Heading>
+        <Heading size="4xl" p="5px">
+          {name}
+        </Heading>
+        <Heading size="sm" p="5px">
+          {birthDate}
+        </Heading>
       </Box>
       <Box>
         {users
@@ -22,7 +26,7 @@ const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
       </Box>
       <VStack align="stretch">
         <CreateDogExerciseModal />
-        // <EditDogModal />
+        <EditDogModal name={name} />
         <Alert handleClick={handleDelete} btnTitle="Delete" />
       </VStack>
     </Flex>

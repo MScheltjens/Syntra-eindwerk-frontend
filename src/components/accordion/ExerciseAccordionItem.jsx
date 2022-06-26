@@ -47,11 +47,11 @@ const ExerciseAccordionItem = ({ ex, modalVersion }) => {
             overflow="hidden"
             display={modalVersion ? "none" : ""}
           >
-            <iframe
+            {/* <iframe
               title="naruto"
               src="https://www.youtube.com/embed/QhBnZ6NPOY0"
               allowFullScreen
-            />
+            /> */}
           </AspectRatio>
         </HStack>
       </AccordionPanel>

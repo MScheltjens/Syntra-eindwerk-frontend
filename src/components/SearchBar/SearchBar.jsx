@@ -1,15 +1,8 @@
 import { useState } from "react";
-import {
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Box,
-  Button,
-} from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { none } from "@cloudinary/url-gen/qualifiers/progressive";
 
-const SearchBar = ({ placeholder, data, setSelection, setSelectEx }) => {
+const SearchBar = ({ placeholder, data, setSelection }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   const handleFilter = (e) => {

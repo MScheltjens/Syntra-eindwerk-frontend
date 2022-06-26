@@ -13,17 +13,18 @@ import DogChartModal from "./DogChartModal";
 const DogGridExerciseList = ({ dogExercises }) => {
   return (
     <VStack
-      p="20px"
       divider={<StackDivider borderColor="#fda94a" />}
       spacing={2}
       align="stretch"
     >
       {/* <p>{JSON.stringify(dogExercises)}</p> */}
       {dogExercises.map((dogExe) => (
-        <Flex key={dogExe.id} justify="space-around" rounded="md">
-          <Flex flexDir="column-reverse" justify="space-around">
-            <Heading size="sm">{dogExe.exercise.name}</Heading>
-            <Text size="sm">
+        <Flex key={dogExe.id} justify="space-between" rounded="md">
+          <Flex flexDir="column" justify="space-around">
+            <Heading size="sm" pl="20px">
+              {dogExe.exercise.name}
+            </Heading>
+            <Text size="sm" pl="20px">
               {dogExe.startDate} - {dogExe.endDate}
             </Text>
             {/* {JSON.stringify(dogExe)} */}

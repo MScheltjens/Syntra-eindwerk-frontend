@@ -16,6 +16,7 @@ import NavItem from "../SideNavigation/NavItem";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
 import { useNavigate } from "react-router";
+import AddDogModal from "../crudModals/AddDogModal";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");

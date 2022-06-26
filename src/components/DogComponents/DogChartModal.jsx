@@ -39,7 +39,13 @@ const DogChartModal = ({ dogExe }) => {
 
   return (
     <>
-      <Button onClick={onOpen} h="100%" boxShadow="lg" maxWidth="200px">
+      <Button
+        onClick={onOpen}
+        h="50px"
+        boxShadow="lg"
+        maxWidth="200px"
+        alignSelf="center"
+      >
         Details
       </Button>
       <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>

@@ -13,10 +13,38 @@ import {
   Input,
   ModalFooter,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { useUploadImageMutation } from "../../store/api/cloudinaryApiSlice";
+import { useForm } from "react-hook-form";
+import { useParams } from "react-router";
+import { useEditDogMutation } from "../../store/api/apiSlice";
 
-const EditDogModal = () => {
+const EditDogModal = ({ name }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
+  const { dogId } = useParams();
+  const [uploadImage] = useUploadImageMutation();
+  const [editDog] = useEditDogMutation();
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm({ mode: "onBlur" });
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("file", data.photo[0]);
+    formData.append("upload_preset", "a8nsnfhz");
+    const response = await uploadImage(formData);
+    const publicId = await response.data.public_id;
+    console.log(dogId, publicId);
+
+    editDog({
+      dogId,
+      body: JSON.stringify({ name: data.name, photo: publicId }),
+    });
+  };
 
   return (
     <>
@@ -30,23 +58,33 @@ const EditDogModal = () => {
           <ModalHeader>Change the details</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
-            </FormControl>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input
+                id="name"
+                placeholder="name"
+                {...register("name", {
+                  minLength: {
+                    value: 4,
+                  },
+                })}
+              />
 
-            <FormControl mt={4}>
-              <FormLabel>Photo</FormLabel>
-              <Input placeholder="Photo" />
-            </FormControl>
+              <FormLabel htmlFor="photo">Photo</FormLabel>
+              <Input id="photo" type="file" {...register("photo")} />
+              <Button
+                mt={4}
+                colorScheme="teal"
+                isLoading={isSubmitting}
+                type="submit"
+              >
+                Submit
+              </Button>
+              <Button onClick={onClose}>Cancel</Button>
+            </form>
           </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3}>
-              Save
-            </Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </ModalFooter>
+          <ModalFooter></ModalFooter>
         </ModalContent>
       </Modal>
     </>
@@ -54,3 +92,15 @@ const EditDogModal = () => {
 };
 
 export default EditDogModal;
+
+// //submit
+// const onSubmit = async (data) => {
+//   const userId = store.getState().user.id;
+//   setHidden(false);
+
+//   // send the photos to cloudinary
+//   const formData = new FormData();
+//   formData.append("file", data.photo[0]);
+//   formData.append("upload_preset", "a8nsnfhz");
+//   const response = await uploadImage(formData);
+//   const publicId = response.data.public_id;
