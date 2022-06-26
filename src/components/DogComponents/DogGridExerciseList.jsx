@@ -21,7 +21,7 @@ const DogGridExerciseList = ({ dogExercises }) => {
       {/* <p>{JSON.stringify(dogExercises)}</p> */}
       {dogExercises.map((dogExe) => (
         <Flex key={dogExe.id} justify="space-around" rounded="md">
-          <Flex flexDir="column" justify="space-around">
+          <Flex flexDir="column-reverse" justify="space-around">
             <Heading size="sm">{dogExe.exercise.name}</Heading>
             <Text size="sm">
               {dogExe.startDate} - {dogExe.endDate}

@@ -30,45 +30,48 @@ const Dog = () => {
         </Center>
       )}
       {isSuccess && (
-        <Box as="div" p={50} overflowY="scroll">
+        <Box as="div" p="20px" overflowY="scroll">
           <Grid
-            templateRows="repeat(5, 3fr)"
+            h="75vh"
+            w="150vh"
+            templateRows="repeat(3, 1fr)"
             templateColumns="repeat(6, 1fr)"
             gap={4}
-            maxH="inherit"
           >
             <GridItem
-              rowSpan={1}
               colSpan={6}
+              rowSpan={1}
               boxShadow="2xl"
               rounded="md"
-              bg="#04abab"
+              bgColor="#04abab"
               p={5}
             >
               <DogGridHeader
                 name={dog.name}
                 birthDate={dog.birthDate}
                 users={dog.users}
+                handleDelete={handleDelete}
               />
             </GridItem>
             <GridItem
-              rowSpan={4}
+              rowSpan={2}
               colSpan={2}
               boxShadow="2xl"
               rounded="md"
-              bg="#04abab"
+              bgColor="#04abab"
               p={5}
             >
               <DogGridControl photo={dog.photo} handleDelete={handleDelete} />
             </GridItem>
             <GridItem
+              rowSpan={3}
               colSpan={4}
-              rowSpan={4}
-              h="500px"
               boxShadow="2xl"
               rounded="md"
-              bg="#04abab"
-              overflowY="scroll"
+              bgColor="#04abab"
+              p={5}
+              overflow="hidden"
+              overflowY="auto"
             >
               <DogGridExerciseList dogExercises={dog.dogExercises} />
             </GridItem>

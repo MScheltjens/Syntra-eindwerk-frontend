@@ -1,6 +1,9 @@
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import { Box, Heading, Flex, VStack } from "@chakra-ui/react";
+import CreateDogExerciseModal from "../crudModals/CreateDogExerciseModal";
+import EditDogModal from "../crudModals/EditDogModal";
+import Alert from "../Alert";
 
-const DogGridHeader = ({ name, birthDate, users }) => {
+const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
   return (
     <Flex justify="space-between" align="center">
       {/* {JSON.stringify(users)} */}
@@ -17,6 +20,11 @@ const DogGridHeader = ({ name, birthDate, users }) => {
             </Heading>
           ))}
       </Box>
+      <VStack align="stretch">
+        <CreateDogExerciseModal />
+        // <EditDogModal />
+        <Alert handleClick={handleDelete} btnTitle="Delete" />
+      </VStack>
     </Flex>
   );
 };

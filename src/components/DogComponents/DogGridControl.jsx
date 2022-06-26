@@ -4,23 +4,18 @@ import EditDogModal from "../crudModals/EditDogModal";
 import CreateDogExerciseModal from "../crudModals/CreateDogExerciseModal";
 import CloudinarySDK from "../cloudinarySDK/CloudinarySDK";
 
-const DogGridControl = ({ photo, handleDelete }) => {
+const DogGridControl = ({ photo }) => {
   return (
     <Flex flexDir="column" gap={50}>
       <Box maxH="100%">
         {photo ? (
-          <Box maxWidth={500} maxH={300} overflow="hidden">
+          <Box maxWidth={500} maxH={300} overflow="hidden" rounded="md">
             <CloudinarySDK publicId={photo} />
           </Box>
         ) : (
           <p>No Image</p>
         )}
       </Box>
-      <VStack align="stretch">
-        <CreateDogExerciseModal />
-        <EditDogModal />
-        <Alert handleClick={handleDelete} btnTitle="Delete" />
-      </VStack>
     </Flex>
   );
 };

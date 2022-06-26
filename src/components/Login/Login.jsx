@@ -17,6 +17,7 @@ import {
   InputRightElement,
   Spinner,
   Img,
+  Input,
 } from "@chakra-ui/react";
 
 const Login = () => {
