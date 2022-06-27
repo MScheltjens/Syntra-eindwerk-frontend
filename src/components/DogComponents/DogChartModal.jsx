@@ -55,12 +55,12 @@ const DogChartModal = ({ dogExe }) => {
         size="6xl"
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent color="blue.500">
           <ModalHeader>Status report</ModalHeader>
           <ModalCloseButton />
           {/* {JSON.stringify(dogExe.exerciseRegistrations)} */}
           <ModalBody pb={6}>
-            <Flex justify="space-around" align="center">
+            <Flex justify="space-around" align="center" mb="50px">
               <Box width="500px">
                 <Heading mb={5}>Daily progress</Heading>
                 <DogBarChart dogExe={dogExe} />

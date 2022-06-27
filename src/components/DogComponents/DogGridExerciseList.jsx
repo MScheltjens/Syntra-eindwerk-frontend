@@ -20,7 +20,7 @@ const DogGridExerciseList = ({ dogExercises }) => {
     >
       {dogExercises.map((dogExe) => (
         <Flex key={dogExe.id} justify="space-between" rounded="md">
-          <Flex flexDir="column" justify="space-around">
+          <Flex flexDir="column" justify="space-around" width="250px">
             <Heading size="lg" pl="20px">
               {dogExe.exercise.name}
             </Heading>

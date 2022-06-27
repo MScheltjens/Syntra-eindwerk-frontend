@@ -18,7 +18,7 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
       // color="orange.300"
     >
       <Box boxShadow="lg">
-        <CloudinaryImg publicId={dogPhoto} />
+        <CloudinaryImg publicId={dogPhoto} width={200} height={200} />
       </Box>
 
       <Box p="6">

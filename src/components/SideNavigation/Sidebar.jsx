@@ -103,7 +103,7 @@ export default function Sidebar() {
               <Heading as="h3" size="sm">
                 {user.name} {user.firstName}
               </Heading>
-              <Text color="gray" mb={30}>
+              <Text color="grey.100" mb={30}>
                 Registered: {user.registerDate}
               </Text>
             </Flex>

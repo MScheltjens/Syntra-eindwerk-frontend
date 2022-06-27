@@ -10,7 +10,7 @@ const DogGridControl = ({ photo }) => {
       <Box maxH="100%">
         {photo ? (
           <Box maxWidth={500} maxH={500} overflow="hidden" rounded="md">
-            <CloudinaryImg publicId={photo} />
+            <CloudinaryImg publicId={photo} width="500" height="500" />
           </Box>
         ) : (
           <p>No Image</p>

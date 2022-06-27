@@ -14,16 +14,17 @@ const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
           <Heading size="sm" p="5px">
             {birthDate}
           </Heading>
+          <Box>
+            {users
+              .filter((user) => user.isTrainer === false)
+              .map((user) => (
+                <Heading>
+                  {user.name}, {user.firstName}
+                </Heading>
+              ))}
+          </Box>
         </Box>
-        <Box>
-          {users
-            .filter((user) => user.isTrainer === false)
-            .map((user) => (
-              <Heading>
-                {user.name}, {user.firstName}
-              </Heading>
-            ))}
-        </Box>
+
         <VStack align="stretch">
           <CreateDogExerciseModal />
           <EditDogModal name={name} />

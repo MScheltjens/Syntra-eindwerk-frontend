@@ -3,9 +3,7 @@ import { useGetDogsQuery } from "../../store/api/apiSlice";
 import DogCard from "../DogComponents/DogCard";
 import { store } from "../../store";
 import {
-  SimpleGrid,
   Box,
-  Center,
   Flex,
   InputGroup,
   Input,
@@ -52,7 +50,12 @@ const Dashboard = () => {
           justifyContent="center"
           color="#108dc7"
         >
-          <InputGroup>
+          <InputGroup
+            display="flex"
+            align="center"
+            justifyContent="center"
+            gap="50px"
+          >
             <InputLeftElement
               pointerEvents="none"
               children={<SearchIcon color="gray.300" />}
@@ -62,12 +65,12 @@ const Dashboard = () => {
               onChange={handleChange}
               borderColor="2px solid #108dc7"
             />
+            <AddDogModal dogs={data} />
           </InputGroup>
           <Flex flexDir="column" align="center" alignSelf="center">
             <Flex flexDir="column" gap={30}>
               <DashboardGrid dogs={filterDogs(data)} />
             </Flex>
-            <AddDogModal dogs={data} />
           </Flex>
         </Box>
       )}

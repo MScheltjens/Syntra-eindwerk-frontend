@@ -20,6 +20,7 @@ import {
   Input,
   Heading,
 } from "@chakra-ui/react";
+import CloudinaryImg from "../cloudinarySDK/CloudinarySDK";
 
 const Login = () => {
   console.log(store.getState());
@@ -66,7 +67,11 @@ const Login = () => {
         alignItems="center"
         height="90%"
       >
-        <Img src="src/assets/DogGo.png" maxWidth="500px" />
+        <CloudinaryImg
+          publicId="doerqp61nrttqopvfabm"
+          height="300"
+          width="800"
+        />
         <Spinner
           thickness="4px"
           speed="0.65s"

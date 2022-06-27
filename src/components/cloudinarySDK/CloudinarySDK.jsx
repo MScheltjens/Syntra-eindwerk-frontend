@@ -6,7 +6,7 @@ import { thumbnail, scale } from "@cloudinary/url-gen/actions/resize";
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
 
-const CloudinaryImg = ({ publicId }) => {
+const CloudinaryImg = ({ publicId, width, height }) => {
   const cld = new Cloudinary({
     cloud: {
       cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD,
@@ -19,7 +19,7 @@ const CloudinaryImg = ({ publicId }) => {
   const myImage = cld
     .image(publicId)
     .resize(
-      thumbnail().width(500).height(500).gravity(focusOn(FocusOn.face()))
+      thumbnail().width(width).height(height).gravity(focusOn(FocusOn.face()))
     );
 
   // Render the transformed image in a React component.

@@ -33,6 +33,7 @@ const ExerciseAccordion = ({ data }) => {
           overflowY="auto"
           color="#108dc7"
         >
+          <p>{JSON.stringify(data)}</p>
           <ExerciseAccordion />
           <Accordion>
             {data.map((ex) => {
@@ -52,7 +53,19 @@ const ExerciseAccordion = ({ data }) => {
                     <Flex justifyContent="space-around">
                       <Box maxW="500px">
                         {/* <Heading>Description:</Heading> */}
-                        <Text mt="50px">{ex.description}</Text>
+                        <Text mt="50px" mb="10px">
+                          {ex.description}
+                        </Text>
+                        <hr />
+                        <Box p="10px">
+                          <Text>Posted at: {ex.AddedAt}</Text>
+                          <Text>Created by: {ex.trainer.firstName}</Text>
+                        </Box>
+                        <hr />
+                        <Heading size="md" p="10px">
+                          Dogs:
+                        </Heading>
+                        <p>{JSON.stringify(ex.dog_exercises)}</p>
                       </Box>
                       <AspectRatio w="560px" ratio={4 / 3}>
                         <iframe
