@@ -15,7 +15,7 @@ export const apiSlice = createApi({
   reducerPath: "dogTrainerApi",
   baseQuery,
   keepUnusedDataFor: 300,
-  tagtypes: ["AllDogs", "Dog"],
+  tagtypes: ["AllDogs", "Dog", "Exercises"],
   endpoints: (builder) => ({
     getDogs: builder.query({
       query: (userId) => `/dogs?users=${userId}`,
@@ -30,6 +30,7 @@ export const apiSlice = createApi({
     }),
     getExercises: builder.query({
       query: () => `/exercises`,
+      providesTags: ["Exercises"],
     }),
     getExercise: builder.query({
       query: (exId) => `/exercises/${exId}`,
@@ -72,6 +73,17 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Dog"],
     }),
+    addExercise: builder.mutation({
+      query: (body) => ({
+        url: `/exercises`,
+        method: "POST",
+        body,
+      }),
+      transformResponse: (response, meta, arg) => {
+        console.log(response);
+      },
+      invalidatesTags: ["Exercises"],
+    }),
   }),
 });
 
@@ -84,6 +96,7 @@ export const {
   useGetOwnersAlfabeticalQuery,
   useAddDogExeMutation,
   useAddDogMutation,
+  useAddExerciseMutation,
   useDeleteDogMutation,
   useEditDogMutation,
 } = apiSlice;

@@ -5,7 +5,7 @@ import { Text } from "@visx/text";
 
 const DogRadialBar = ({ dogExe }) => {
   // amounts for the bar
-  const totalAmount = dogExe.totalAmount;
+  const totalAmount = dogExe.Amount;
   const amountDone = dogExe.exerciseRegistrations.reduce((acc, obj) => {
     return acc + obj.amountDone;
   }, 0);

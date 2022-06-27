@@ -5,11 +5,12 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Box,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import ExerciseAccordion from "../ExerciseAccordion";
 import { useState } from "react";
-
+import AddExModal from "../crudModals/AddExModal";
 const Exercises = () => {
   const [input, setInput] = useState("");
   const { data, isLoading, isSuccess, isError, error } = useGetExercisesQuery();
@@ -23,13 +24,21 @@ const Exercises = () => {
   return (
     <>
       {/* {<p>{JSON.stringify(wdata)}</p>} */}
-      <InputGroup m="20px" w="82vw">
-        <InputLeftElement
-          pointerEvents="none"
-          children={<SearchIcon color="gray.300" />}
-        />
-        <Input type="text" onChange={(e) => setInput(e.target.value)} />
-      </InputGroup>
+      <Flex alignItems="center" justifyContent="space-around">
+        <InputGroup m="20px" w="82vw">
+          <InputLeftElement
+            pointerEvents="none"
+            children={<SearchIcon color="gray.300" />}
+          />
+          <Input
+            type="text"
+            onChange={(e) => setInput(e.target.value)}
+            width="500px"
+          />
+        </InputGroup>
+        <AddExModal />
+      </Flex>
+
       {isLoading && (
         <Flex justify="center" align="center" mt="200px" w="75vw">
           <Spinner />

@@ -16,7 +16,18 @@ export const cloudinaryApiSlice = createApi({
         return response;
       },
     }),
+    uploadVideo: builder.mutation({
+      query: (body) => ({
+        url: "/video/upload",
+        method: "Post",
+        body,
+      }),
+      transformResponse: (response, meta, arg) => {
+        return response;
+      },
+    }),
   }),
 });
 
-export const { useUploadImageMutation, useGetImagesQuery } = cloudinaryApiSlice;
+export const { useUploadImageMutation, useUploadVideoMutation } =
+  cloudinaryApiSlice;

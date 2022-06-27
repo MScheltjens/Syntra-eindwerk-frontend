@@ -17,7 +17,6 @@ const DogGridExerciseList = ({ dogExercises }) => {
       spacing={2}
       align="stretch"
     >
-      {/* <p>{JSON.stringify(dogExercises)}</p> */}
       {dogExercises.map((dogExe) => (
         <Flex key={dogExe.id} justify="space-between" rounded="md">
           <Flex flexDir="column" justify="space-around">
@@ -27,11 +26,9 @@ const DogGridExerciseList = ({ dogExercises }) => {
             <Text size="sm" pl="20px">
               {dogExe.startDate} - {dogExe.endDate}
             </Text>
-            {/* {JSON.stringify(dogExe)} */}
           </Flex>
           <Box>
             <DogRadialBar dogExe={dogExe} />
-            {/* <DogBarChart /> */}
           </Box>
           <DogChartModal dogExe={dogExe} />
         </Flex>

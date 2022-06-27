@@ -6,7 +6,6 @@ import Alert from "../Alert";
 const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
   return (
     <Flex justify="space-between" align="center">
-      {JSON.stringify(users)}
       <Box>
         <Heading size="4xl" p="5px">
           {name}

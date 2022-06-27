@@ -17,7 +17,6 @@ import {
   InputLeftElement,
   Box,
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
 import {
   useAddDogMutation,
