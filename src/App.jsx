@@ -20,7 +20,9 @@ const App = () => {
               <Route path="dogs/:dogId/*" element={<Dog />}>
                 {" "}
               </Route>
-              <Route path="exercises" element={<Exercises />} />
+              <Route path="exercises/*" element={<Exercises />}>
+                <Route index element={<Exercises />} />
+              </Route>
             </Route>
           </Route>
         </Route>

@@ -24,7 +24,7 @@ const Exercises = () => {
   return (
     <>
       {/* {<p>{JSON.stringify(wdata)}</p>} */}
-      <Flex alignItems="center" justifyContent="space-around">
+      <Flex alignItems="center">
         <InputGroup m="20px" w="82vw">
           <InputLeftElement
             pointerEvents="none"
