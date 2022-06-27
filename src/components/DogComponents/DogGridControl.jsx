@@ -2,7 +2,7 @@ import { Flex, Box, VStack } from "@chakra-ui/react";
 import Alert from "../Alert";
 import EditDogModal from "../crudModals/EditDogModal";
 import CreateDogExerciseModal from "../crudModals/CreateDogExerciseModal";
-import CloudinarySDK from "../cloudinarySDK/CloudinarySDK";
+import CloudinaryImg from "../cloudinarySDK/CloudinarySDK";
 
 const DogGridControl = ({ photo }) => {
   return (
@@ -10,7 +10,7 @@ const DogGridControl = ({ photo }) => {
       <Box maxH="100%">
         {photo ? (
           <Box maxWidth={500} maxH={500} overflow="hidden" rounded="md">
-            <CloudinarySDK publicId={photo} />
+            <CloudinaryImg publicId={photo} />
           </Box>
         ) : (
           <p>No Image</p>

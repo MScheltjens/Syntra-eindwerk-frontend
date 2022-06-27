@@ -1,8 +1,7 @@
 import React from "react";
 import { Box, Heading } from "@chakra-ui/react";
 
-import CloudinarySDK from "../../components/cloudinarySDK/CloudinarySDK";
-import { scale } from "@cloudinary/url-gen/actions/resize";
+import CloudinaryImg from "../../components/cloudinarySDK/CloudinarySDK";
 
 const DogCard = ({ dogPhoto, dogExe, name }) => {
   return (
@@ -20,7 +19,7 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
       }}
     >
       <Box borderBottom="2px solid #fda94a">
-        <CloudinarySDK publicId={dogPhoto} />
+        <CloudinaryImg publicId={dogPhoto} />
       </Box>
 
       <Box p="6">

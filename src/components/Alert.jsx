@@ -7,6 +7,7 @@ import {
   AlertDialogOverlay,
   useDisclosure,
   Button,
+  Icon,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 function Alert({ btnTitle, alertHeader, handleClick }) {

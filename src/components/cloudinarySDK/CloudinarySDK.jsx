@@ -5,9 +5,8 @@ import { Transformation } from "@cloudinary/url-gen";
 import { thumbnail, scale } from "@cloudinary/url-gen/actions/resize";
 import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
 import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
-import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
 
-const CloudinarySDK = ({ publicId }) => {
+const CloudinaryImg = ({ publicId }) => {
   const cld = new Cloudinary({
     cloud: {
       cloudName: "ddl69s3ju",
@@ -21,24 +20,7 @@ const CloudinarySDK = ({ publicId }) => {
     .image(publicId)
     .resize(
       thumbnail().width(500).height(500).gravity(focusOn(FocusOn.face()))
-    ); // Crop the image.
-  // .roundCorners(byRadius(20)); // Round the corners.
-  // .rotate(byAngle(10))
-  // .format("png"); // Rotate the result.
-  // Deliver as PNG. */ // Apply a sepia effect.
-  // .overlay(
-  //   // Overlay the Cloudinary logo.
-  //   source(
-  //     image("cloudinary_icon_blue").transformation(
-  //       new Transformation()
-  //         .resize(scale(50)) // Resize the logo.
-  //         .adjust(opacity(60)) // Adjust the opacity of the logo.
-  //         .adjust(brightness(200))
-  //     ) // Adjust the brightness of the logo.
-  //   ).position(
-  //     new Position().gravity(compass("south_east")).offsetX(5).offsetY(5)
-  //   ) // Position the logo.
-  // );
+    );
 
   // Render the transformed image in a React component.
   return (
@@ -48,4 +30,4 @@ const CloudinarySDK = ({ publicId }) => {
   );
 };
 
-export default CloudinarySDK;
+export default CloudinaryImg;
