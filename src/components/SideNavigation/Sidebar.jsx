@@ -8,29 +8,35 @@ import {
   Heading,
   Box,
   Button,
+  Icon,
 } from "@chakra-ui/react";
 import { store } from "../../store";
-import { GiDogHouse, GiJumpingDog } from "react-icons/gi";
+import { GiDogHouse, GiJumpingDog, GiDogBowl } from "react-icons/gi";
 import Alert from "../Alert";
 import NavItem from "../SideNavigation/NavItem";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/userSlice";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import AddDogModal from "../crudModals/AddDogModal";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [navSize, changeNavSize] = useState("large");
   const user = store.getState().user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
+  console.log(Object.values(params));
 
   const handleLogout = () => {
     dispatch(logout(""));
     navigate("/");
   };
 
+  //nav treats exercise as child route. quick fix:
+
   return (
-    <Box bg="#b6e0ec">
+    <Box color="orange.300">
       <Flex
         pos="sticky"
         p="5"
@@ -39,29 +45,45 @@ export default function Sidebar() {
         w={navSize == "small" ? "75px" : "200px"}
         flexDir="column"
         justifyContent="space-around"
-        bg="#04abab"
         roundedRight="lg"
+        align="center"
+        bg="#108dc7"
       >
-        <Flex
-          p="5%"
-          flexDir="column"
-          w="100%"
-          alignItems={navSize == "small" ? "center" : "flex-start"}
-          as="nav"
+        <NavLink to="/dashboard">
+          <Flex direction="column" align="center" gap="10px">
+            <Icon as={GiDogHouse} boxSize="50px" color="orange.300" />
+            <Heading s="lg" mt="10px">
+              Start
+            </Heading>
+          </Flex>
+        </NavLink>
+        <NavLink
+          to="exercises"
+          style={({ isActive }) => {
+            return { borderBottom: isActive ? "2px solid #108dc7" : "grey" };
+          }}
         >
-          <NavItem
-            navSize={navSize}
-            title="Start"
-            linkTo={"/dashboard"}
-            icon={GiDogHouse}
-          ></NavItem>
-          <NavItem
-            navSize={navSize}
-            title="Exercises"
-            linkTo={"exercises"}
-            icon={GiJumpingDog}
-          />
-        </Flex>
+          <Flex direction="column" align="center">
+            <Icon as={GiJumpingDog} boxSize="30px" />
+            <Heading size="md" mt="10px">
+              {" "}
+              Exercises
+            </Heading>
+          </Flex>
+        </NavLink>
+        <NavLink
+          to="healthAndFood"
+          style={({ isActive }) => {
+            return { borderBottom: isActive ? "2px solid #108dc7" : "grey" };
+          }}
+        >
+          <Flex direction="column" align="center">
+            <Icon as={GiDogBowl} boxSize="30px" />
+            <Heading size="md" mt="10px">
+              Health
+            </Heading>
+          </Flex>
+        </NavLink>
 
         <Flex
           p="5%"

@@ -21,12 +21,15 @@ import { Heading } from "@chakra-ui/react";
 
 const DogRadialChart = ({ dogExe }) => {
   ChartJS.register(ArcElement, Tooltip, Legend);
+  console.log(dogExe);
 
   const totalAmountDone = dogExe.exerciseRegistrations.reduce((acc, obj) => {
     return acc + obj.amountDone;
   }, 0);
 
-  const percent = Math.round((dogExe.totalAmount / totalAmountDone) * 10);
+  console.log("correct:" + totalAmountDone);
+
+  const percent = Math.round((totalAmountDone / dogExe.Amount) * 100);
   console.log(percent);
 
   const data = {
@@ -34,9 +37,9 @@ const DogRadialChart = ({ dogExe }) => {
     datasets: [
       {
         label: "totalOverweek",
-        data: [dogExe.totalAmount, totalAmountDone],
-        backgroundColor: ["rgba(4, 131, 135, .6)", "rgba(4, 131, 135, 0.2)"],
-        borderColor: ["rgb(4, 131, 135)", "rgb(4, 131, 135, .6)"],
+        data: [dogExe.Amount, totalAmountDone],
+        backgroundColor: ["white", "rgba(99, 179, 237, .6"],
+        borderColor: ["rgba(99, 179, 237)", "rgba(99, 179, 237, .6)"],
         borderWidth: 1,
         cutout: "100",
       },
@@ -75,6 +78,7 @@ const DogRadialChart = ({ dogExe }) => {
         var fontSize = (height / 80).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
+
         var text = "Foo-bar",
           textX = Math.round((width - ctx.measureText(text).width) / 1),
           textY = height / 2;

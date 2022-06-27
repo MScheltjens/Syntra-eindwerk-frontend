@@ -45,13 +45,23 @@ const Dashboard = () => {
       )}
 
       {data && (
-        <Box as="div" p="20px" maxH="80vh" justifyContent="center">
+        <Box
+          as="div"
+          p="20px"
+          maxH="80vh"
+          justifyContent="center"
+          color="#108dc7"
+        >
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
               children={<SearchIcon color="gray.300" />}
             />
-            <Input type="text" onChange={handleChange} />
+            <Input
+              type="text"
+              onChange={handleChange}
+              borderColor="2px solid #108dc7"
+            />
           </InputGroup>
           <Flex flexDir="column" align="center" alignSelf="center">
             <Flex flexDir="column" gap={30}>

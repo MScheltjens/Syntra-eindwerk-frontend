@@ -45,9 +45,8 @@ const DogBarChart = ({ dogExe }) => {
       {
         label: "Daily Exercises",
         data: dogExe.exerciseRegistrations.map((ex) => ex.amountDone),
-        backgroundColor: "rgba(4, 131, 135, .6)",
+        backgroundColor: "#63B3ED",
         borderWidth: 2,
-        borderColor: "rgba(4, 131, 135)",
       },
     ],
   };

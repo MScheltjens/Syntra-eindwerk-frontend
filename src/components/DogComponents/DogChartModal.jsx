@@ -48,7 +48,12 @@ const DogChartModal = ({ dogExe }) => {
       >
         Details
       </Button>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="6xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Status report</ModalHeader>

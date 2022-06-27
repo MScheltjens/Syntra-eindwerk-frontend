@@ -5,31 +5,32 @@ import Alert from "../Alert";
 
 const DogGridHeader = ({ name, birthDate, users, handleDelete }) => {
   return (
-    <Flex justify="space-between" align="center">
-      {JSON.stringify(users)}
-      <Box>
-        <Heading size="4xl" p="5px">
-          {name}
-        </Heading>
-        <Heading size="sm" p="5px">
-          {birthDate}
-        </Heading>
-      </Box>
-      <Box>
-        {users
-          .filter((user) => user.isTrainer === false)
-          .map((user) => (
-            <Heading>
-              {user.name}, {user.firstName}
-            </Heading>
-          ))}
-      </Box>
-      <VStack align="stretch">
-        <CreateDogExerciseModal />
-        <EditDogModal name={name} />
-        <Alert handleClick={handleDelete} btnTitle="Delete" />
-      </VStack>
-    </Flex>
+    <Box bg="#108dc7" color="orange.200">
+      <Flex justify="space-between" align="center">
+        <Box pl="50px" pt="10px">
+          <Heading size="4xl" p="5px">
+            {name}
+          </Heading>
+          <Heading size="sm" p="5px">
+            {birthDate}
+          </Heading>
+        </Box>
+        <Box>
+          {users
+            .filter((user) => user.isTrainer === false)
+            .map((user) => (
+              <Heading>
+                {user.name}, {user.firstName}
+              </Heading>
+            ))}
+        </Box>
+        <VStack align="stretch">
+          <CreateDogExerciseModal />
+          <EditDogModal name={name} />
+          <Alert handleClick={handleDelete} btnTitle="Delete" />
+        </VStack>
+      </Flex>
+    </Box>
   );
 };
 

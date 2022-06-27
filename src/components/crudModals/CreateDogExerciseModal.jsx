@@ -20,6 +20,7 @@ import {
   NumberDecrementStepper,
   Select,
   Center,
+  Spacer,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -29,7 +30,6 @@ import { useGetExercisesQuery } from "../../store/api/apiSlice";
 const CreateDogExerciseModal = () => {
   const [selected, setSelected] = useState();
   const [dailyAmount, setDailyAmount] = useState();
-
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = useRef(null);
   const accRef = useRef();
@@ -74,7 +74,7 @@ const CreateDogExerciseModal = () => {
         <ModalContent>
           <ModalHeader>Create an Exercise</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pb={6} color="blue.500">
             <form onSubmit={handleSubmit}>
               <FormControl>
                 <Flex flexDir="column" justify="space-around" minHeight="400px">
@@ -125,14 +125,20 @@ const CreateDogExerciseModal = () => {
                   </Flex>
                 </Flex>
               </FormControl>
-              <Center>
-                <Button mt={4} colorScheme="teal" type="submit">
+              <Flex justify="center" gap="20px">
+                <Button
+                  mt={4}
+                  colorScheme="teal"
+                  type="submit"
+                  bgColor="blue.500"
+                >
                   Submit
                 </Button>
+
                 <Button onClick={onClose} mt={4}>
                   Cancel
                 </Button>
-              </Center>
+              </Flex>
             </form>
           </ModalBody>
           <ModalFooter></ModalFooter>

@@ -15,20 +15,17 @@ import {
   Text,
   InputGroup,
   InputLeftElement,
+  Flex,
   Box,
+  Textarea,
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
 import { useEffect, useRef, useState } from "react";
-import {
-  useAddDogMutation,
-  useGetOwnersAlfabeticalQuery,
-} from "../../store/api/apiSlice";
 import { store } from "../../store";
-import { useUploadImageMutation } from "../../store/api/cloudinaryApiSlice";
 import { useForm } from "react-hook-form";
-import SearchBar from "../SearchBar/SearchBar";
+import { useUploadVideoMutation } from "../../store/api/cloudinaryApiSlice";
+import { useAddExerciseMutation } from "../../store/api/apiSlice";
 
-const AddDogModal = ({ dogs }) => {
+const AddExModal = ({ dogs }) => {
   const [selection, setSelection] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -39,28 +36,32 @@ const AddDogModal = ({ dogs }) => {
 
   // requests
 
-  const [uploadImage] = useUploadImageMutation();
-  const [addDog, { data, error, isError }] = useAddDogMutation();
-  const { data: owners } = useGetOwnersAlfabeticalQuery();
+  const [uploadVideo] = useUploadVideoMutation();
+  const [addExercise] = useAddExerciseMutation();
   const initialRef = useRef(null);
 
   //submit
   const onSubmit = async (data) => {
+    console.log(data);
     const userId = store.getState().user.id;
 
     // send the photos to cloudinary
     const formData = new FormData();
-    formData.append("file", data.photo[0]);
+    formData.append("file", data.video[0]);
     formData.append("upload_preset", "a8nsnfhz");
-    const response = await uploadImage(formData);
+    const response = await uploadVideo(formData);
     const publicId = response.data.public_id;
-
+    console.log(publicId);
+    console.log("name: " + data.name);
+    console.log("video:" + publicId);
+    console.log("trainer:" + userId);
+    console.log("description:" + data.description);
     //collect formdata and post to api
-    addDog({
+    addExercise({
       name: data.name,
-      birthDate: data.birthDate,
-      photo: publicId,
-      users: [`/api/users/${userId}`, `/api/users/${selection}`],
+      videoUrl: publicId,
+      trainer: `api/users/${userId}`,
+      description: data.description,
     });
   };
   return (
@@ -70,16 +71,23 @@ const AddDogModal = ({ dogs }) => {
         h="50px"
         boxShadow="lg"
         w="200px"
-        border="2px solid  #fda94a"
-        _hover={{ bg: "#fda94a", color: " white" }}
-        _focus={{ boxShadow: "outline" }}
+        border="2px solid  'orange.400'"
+        _hover={{ bg: "blue.500", color: " white" }}
+        color="blue.500"
+        bg="orange.300"
       >
-        Add a dog
+        Add an exercise
       </Button>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="2xl"
+        h="5OOpx"
+      >
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create a dog profile</ModalHeader>
+        <ModalContent color="blue.500">
+          <ModalHeader>Create an exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -95,46 +103,30 @@ const AddDogModal = ({ dogs }) => {
                     },
                   })}
                 />
-                <FormLabel htmlFor="birthDay">BirthDay</FormLabel>
-                <Input
-                  id="birthDay"
-                  placeholder="name"
-                  type="date"
-                  {...register("birthDate")}
-                />
-                <FormLabel htmlFor="photo">Photo</FormLabel>
-                <Input id="photo" type="file" {...register("photo")} />
+                <FormLabel htmlFor="description">Description</FormLabel>
+                <Textarea {...register("description")}></Textarea>
+                <FormLabel htmlFor="photo">Upload a video</FormLabel>
 
-                <Heading size="md" mt={5} mb={2}>
-                  Owner
-                </Heading>
-                <Text mb={5}>
-                  Make sure the owner is registered on the app!
-                </Text>
-
-                <SearchBar
-                  data={owners}
-                  placeholder={"find an already registered owner"}
-                  setSelection={setSelection}
-                />
+                <Input id="video" type="file" {...register("video")} />
 
                 <FormErrorMessage>
                   {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
-              <Box display="flex">
+              <Flex justify="center" gap="20px">
                 <Button
                   mt={4}
                   colorScheme="teal"
                   isLoading={isSubmitting}
                   type="submit"
+                  bg="blue.500"
                 >
                   Submit
                 </Button>
                 <Button mt={4} onClick={onClose}>
                   Cancel
                 </Button>
-              </Box>
+              </Flex>
             </form>
           </ModalBody>
         </ModalContent>
@@ -143,4 +135,4 @@ const AddDogModal = ({ dogs }) => {
   );
 };
 
-export default AddDogModal;
+export default AddExModal;

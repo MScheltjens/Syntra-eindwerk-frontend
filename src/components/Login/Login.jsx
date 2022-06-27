@@ -18,6 +18,7 @@ import {
   Spinner,
   Img,
   Input,
+  Heading,
 } from "@chakra-ui/react";
 
 const Login = () => {
@@ -57,7 +58,6 @@ const Login = () => {
       flexDirection="column"
       width="100wh"
       height="80vh"
-      backgroundColor="fff"
       alignItems="center"
     >
       <Stack
@@ -75,6 +75,9 @@ const Login = () => {
           size="xl"
           visibility={!hidden ? "hidden" : ""}
         />
+        <Heading size="lg" mt>
+          Please log in and start training
+        </Heading>
         <Box
           minW={{ base: "90%", md: "468px" }}
           visibility={hidden ? "hidden" : ""}
@@ -83,8 +86,9 @@ const Login = () => {
             <Stack
               spacing={4}
               p="1rem"
-              backgroundColor="whiteAlpha.900"
               boxShadow="md"
+              border="3px solid #ef8e38"
+              rounded="lg"
             >
               <FormControl>
                 <InputGroup>
@@ -93,7 +97,7 @@ const Login = () => {
                     type="email"
                     placeholder="email address"
                     onChange={(e) => setEmail(e.target.value)}
-                    bg="white"
+                    bg="transparent"
                   />
                 </InputGroup>
               </FormControl>

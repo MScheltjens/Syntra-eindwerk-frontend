@@ -12,6 +12,7 @@ import {
   FormLabel,
   Input,
   ModalFooter,
+  Box,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useUploadImageMutation } from "../../store/api/cloudinaryApiSlice";
@@ -57,7 +58,7 @@ const EditDogModal = ({ name }) => {
         <ModalContent>
           <ModalHeader>Change the details</ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
+          <ModalBody pb={6} color="blue.500">
             <form onSubmit={handleSubmit(onSubmit)}>
               <FormLabel htmlFor="name">Name</FormLabel>
               <Input
@@ -72,15 +73,23 @@ const EditDogModal = ({ name }) => {
 
               <FormLabel htmlFor="photo">Photo</FormLabel>
               <Input id="photo" type="file" {...register("photo")} />
-              <Button
-                mt={4}
-                colorScheme="teal"
-                isLoading={isSubmitting}
-                type="submit"
+              <Box
+                display="flex"
+                justifyContent="center"
+                gap="20px"
+                align="center"
+                mt="50px"
               >
-                Submit
-              </Button>
-              <Button onClick={onClose}>Cancel</Button>
+                <Button
+                  colorScheme="teal"
+                  isLoading={isSubmitting}
+                  type="submit"
+                  bg="blue.500"
+                >
+                  Submit
+                </Button>
+                <Button onClick={onClose}>Cancel</Button>
+              </Box>
             </form>
           </ModalBody>
 
