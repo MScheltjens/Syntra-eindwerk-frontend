@@ -7,7 +7,6 @@ import {
   AlertDialogOverlay,
   useDisclosure,
   Button,
-  Icon,
 } from "@chakra-ui/react";
 import { useRef } from "react";
 function Alert({ btnTitle, alertHeader, handleClick }) {
@@ -16,7 +15,7 @@ function Alert({ btnTitle, alertHeader, handleClick }) {
 
   return (
     <>
-      <Button colorScheme="red" onClick={onOpen}>
+      <Button bg="red" onClick={onOpen}>
         {btnTitle}
       </Button>
 

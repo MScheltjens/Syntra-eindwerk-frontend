@@ -10,11 +10,15 @@ import {
   Heading,
   Icon,
   Alert,
+  AspectRatio,
+  VStack,
 } from "@chakra-ui/react";
 import { Link, Routes, Route, useParams } from "react-router-dom";
 import { IoMdCreate, IoMdClose } from "react-icons/io";
 import CloudinaryVid from "./cloudinarySDK/CloudinarySDKVideo";
 import { CloudinaryVideo } from "@cloudinary/url-gen";
+import AddExModal from "./crudModals/AddExModal";
+import EditDogModal from "./crudModals/EditDogModal";
 
 const ExerciseAccordion = ({ data }) => {
   const params = useParams();
@@ -24,7 +28,7 @@ const ExerciseAccordion = ({ data }) => {
   return (
     <>
       {data && (
-        <Box w="80vw" m="30px" overflow="hidden" overflowY="auto">
+        <Box w="80vw" h="500px" m="30px" overflow={"hidden"} overflowY="auto">
           <ExerciseAccordion />
           <Accordion>
             {data.map((ex) => {
@@ -41,33 +45,23 @@ const ExerciseAccordion = ({ data }) => {
                     </h2>
                   </Link>
                   <AccordionPanel pb={4}>
-                    <Flex justify="space-between">
-                      <Heading>Description:</Heading>
-
-                      <Flex mr="30px" gap="30px">
-                        {/* <Icon
-                          as={IoMdCreate}
-                          boxSize="40px"
-                          color="green"
-                          _hover={{ cursor: "pointer" }}
-                        />
-                        <Icon
-                          as={IoMdClose}
-                          boxSize="40px"
-                          color="red"
-                          _hover={{ cursor: "pointer" }}
-                        /> */}
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Box>
+                    <Box display="flex" justifyContent="space-around" p="20px">
+                      <Box maxW="560px">
+                        <Heading size="sm" pb="20px">
+                          Description:
+                        </Heading>
                         <Text>{ex.description}</Text>
                       </Box>
 
-                      <Box borderBottom="2px solid #fda94a">
-                        <CloudinaryVideo publicId={ex.videoUrl} />
-                      </Box>
-                    </Flex>
+                      <AspectRatio w="560px" ratio={4 / 3}>
+                        {/* <CloudinaryVideo publicId={ex.videoUrl} /> */}
+                        <iframe
+                          title="naruto"
+                          src="https://www.youtube.com/embed/QhBnZ6NPOY0"
+                          allowFullScreen
+                        />
+                      </AspectRatio>
+                    </Box>
                   </AccordionPanel>
                 </AccordionItem>
               );
