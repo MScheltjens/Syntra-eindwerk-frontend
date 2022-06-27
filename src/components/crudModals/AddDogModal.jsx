@@ -39,7 +39,7 @@ const AddDogModal = ({ dogs }) => {
   // requests
 
   const [uploadImage] = useUploadImageMutation();
-  const [addDog, { data, error, isError }] = useAddDogMutation();
+  const [addDog, { response }] = useAddDogMutation();
   const { data: owners } = useGetOwnersAlfabeticalQuery();
   const initialRef = useRef(null);
 
@@ -50,8 +50,12 @@ const AddDogModal = ({ dogs }) => {
     // send the photos to cloudinary
     const formData = new FormData();
     formData.append("file", data.photo[0]);
-    formData.append("upload_preset", "a8nsnfhz");
+    formData.append(
+      "upload_preset",
+      import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+    );
     const response = await uploadImage(formData);
+    console.log(response.data);
     const publicId = response.data.public_id;
 
     //collect formdata and post to api
@@ -62,6 +66,10 @@ const AddDogModal = ({ dogs }) => {
       users: [`/api/users/${userId}`, `/api/users/${selection}`],
     });
   };
+
+  useEffect(() => {
+    console.log(selection);
+  }, [selection]);
   return (
     <>
       <Button
@@ -70,8 +78,7 @@ const AddDogModal = ({ dogs }) => {
         boxShadow="lg"
         bg="#fda94a"
         w="200px"
-        border="2px solid  #fda94a"
-        _hover={{ bg: "#048387", color: " white" }}
+        _hover={{ bg: "#108dc7", color: "white" }}
         _focus={{ boxShadow: "outline" }}
       >
         Add a dog
@@ -122,12 +129,13 @@ const AddDogModal = ({ dogs }) => {
                   {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
-              <Box display="flex">
+              <Box display="flex" justifyContent="center" gap="20px">
                 <Button
                   mt={4}
                   colorScheme="teal"
                   isLoading={isSubmitting}
                   type="submit"
+                  bg="blue.500"
                 >
                   Submit
                 </Button>

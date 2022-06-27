@@ -38,8 +38,8 @@ const DogRadialChart = ({ dogExe }) => {
       {
         label: "totalOverweek",
         data: [dogExe.Amount, totalAmountDone],
-        backgroundColor: ["rgba(4, 131, 135, .6)", "rgba(4, 131, 135, 0.2)"],
-        borderColor: ["rgb(4, 131, 135)", "rgb(4, 131, 135, .6)"],
+        backgroundColor: ["white", "rgba(99, 179, 237, .6"],
+        borderColor: ["rgba(99, 179, 237)", "rgba(99, 179, 237, .6)"],
         borderWidth: 1,
         cutout: "100",
       },
@@ -78,6 +78,7 @@ const DogRadialChart = ({ dogExe }) => {
         var fontSize = (height / 80).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "top";
+
         var text = "Foo-bar",
           textX = Math.round((width - ctx.measureText(text).width) / 1),
           textY = height / 2;

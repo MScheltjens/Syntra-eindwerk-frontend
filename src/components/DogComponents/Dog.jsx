@@ -43,7 +43,7 @@ const Dog = () => {
               rowSpan={1}
               boxShadow="2xl"
               rounded="md"
-              bgColor="#04abab"
+              bgColor="#108dc7"
               p={5}
             >
               <DogGridHeader
@@ -58,7 +58,7 @@ const Dog = () => {
               colSpan={2}
               boxShadow="2xl"
               rounded="md"
-              bgColor="#04abab"
+              bgColor="#108dc7"
               p={5}
             >
               <DogGridControl photo={dog.photo} handleDelete={handleDelete} />
@@ -68,7 +68,7 @@ const Dog = () => {
               colSpan={4}
               boxShadow="2xl"
               rounded="md"
-              bgColor="#04abab"
+              bgColor="#108dc7"
               p={5}
               overflow="hidden"
               overflowY="auto"

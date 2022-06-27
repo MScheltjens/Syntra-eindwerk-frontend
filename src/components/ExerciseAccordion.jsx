@@ -10,6 +10,7 @@ import {
   Heading,
   Icon,
   Alert,
+  AspectRatio,
 } from "@chakra-ui/react";
 import { Link, Routes, Route, useParams } from "react-router-dom";
 import { IoMdCreate, IoMdClose } from "react-icons/io";
@@ -24,7 +25,14 @@ const ExerciseAccordion = ({ data }) => {
   return (
     <>
       {data && (
-        <Box w="80vw" m="30px" overflow="hidden" overflowY="auto">
+        <Box
+          w="80vw"
+          m="30px"
+          maxH="600"
+          overflow="hidden"
+          overflowY="auto"
+          color="#108dc7"
+        >
           <ExerciseAccordion />
           <Accordion>
             {data.map((ex) => {
@@ -34,39 +42,29 @@ const ExerciseAccordion = ({ data }) => {
                     <h2>
                       <AccordionButton>
                         <Box flex="1" textAlign="left">
-                          {ex.name}
+                          <Heading size="md">{ex.name}</Heading>
                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
                   </Link>
                   <AccordionPanel pb={4}>
-                    <Flex justify="space-between">
-                      <Heading>Description:</Heading>
-
-                      <Flex mr="30px" gap="30px">
-                        {/* <Icon
-                          as={IoMdCreate}
-                          boxSize="40px"
-                          color="green"
-                          _hover={{ cursor: "pointer" }}
+                    <Flex justifyContent="space-around">
+                      <Box maxW="500px">
+                        {/* <Heading>Description:</Heading> */}
+                        <Text mt="50px">{ex.description}</Text>
+                      </Box>
+                      <AspectRatio w="560px" ratio={4 / 3}>
+                        <iframe
+                          title="naruto"
+                          src="https://www.youtube.com/embed/QhBnZ6NPOY0"
+                          allowFullScreen
                         />
-                        <Icon
-                          as={IoMdClose}
-                          boxSize="40px"
-                          color="red"
-                          _hover={{ cursor: "pointer" }}
-                        /> */}
-                      </Flex>
-                    </Flex>
-                    <Flex>
-                      <Box>
-                        <Text>{ex.description}</Text>
-                      </Box>
+                      </AspectRatio>
 
-                      <Box borderBottom="2px solid #fda94a">
+                      {/* <Box borderBottom="2px solid #fda94a">
                         <CloudinaryVideo publicId={ex.videoUrl} />
-                      </Box>
+                      </Box> */}
                     </Flex>
                   </AccordionPanel>
                 </AccordionItem>

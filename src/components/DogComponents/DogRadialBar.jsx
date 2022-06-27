@@ -10,8 +10,8 @@ const DogRadialBar = ({ dogExe }) => {
     return acc + obj.amountDone;
   }, 0);
   const exercises = [
-    { symbol: "DONE", amount: amountDone, color: "#fda94a" },
-    { symbol: "TOTAL", amount: totalAmount, color: "#048387" },
+    { symbol: "DONE", amount: amountDone, color: "#FBD38D" },
+    { symbol: "TOTAL", amount: totalAmount, color: "#2B6CB0" },
   ];
 
   // bar sizing and active state

@@ -24,20 +24,23 @@ const Exercises = () => {
   return (
     <>
       {/* {<p>{JSON.stringify(wdata)}</p>} */}
-      <Flex alignItems="center">
-        <InputGroup m="20px" w="82vw">
-          <InputLeftElement
-            pointerEvents="none"
-            children={<SearchIcon color="gray.300" />}
-          />
-          <Input
-            type="text"
-            onChange={(e) => setInput(e.target.value)}
-            width="500px"
-          />
-        </InputGroup>
+
+      <InputGroup
+        m="20px"
+        w="82vw"
+        display="flex"
+        justifyContent="space-between"
+        gap="50px"
+        alignItems="center"
+        borderColor="blue.500"
+      >
+        <InputLeftElement
+          pointerEvents="none"
+          children={<SearchIcon color="gray.300" />}
+        />
+        <Input type="text" onChange={(e) => setInput(e.target.value)} />
         <AddExModal />
-      </Flex>
+      </InputGroup>
 
       {isLoading && (
         <Flex justify="center" align="center" mt="200px" w="75vw">

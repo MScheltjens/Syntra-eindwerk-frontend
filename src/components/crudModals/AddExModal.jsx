@@ -15,6 +15,7 @@ import {
   Text,
   InputGroup,
   InputLeftElement,
+  Flex,
   Box,
   Textarea,
 } from "@chakra-ui/react";
@@ -70,15 +71,22 @@ const AddExModal = ({ dogs }) => {
         h="50px"
         boxShadow="lg"
         w="200px"
-        border="2px solid  #fda94a"
-        _hover={{ bg: "#fda94a", color: " white" }}
-        _focus={{ boxShadow: "outline" }}
+        border="2px solid  'orange.400'"
+        _hover={{ bg: "blue.500", color: " white" }}
+        color="blue.500"
+        bg="orange.300"
       >
-        Add an exercis
+        Add an exercise
       </Button>
-      <Modal initialFocusRef={initialRef} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        initialFocusRef={initialRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="2xl"
+        h="5OOpx"
+      >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent color="blue.500">
           <ModalHeader>Create an exercise</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
@@ -105,19 +113,20 @@ const AddExModal = ({ dogs }) => {
                   {errors.name && errors.name.message}
                 </FormErrorMessage>
               </FormControl>
-              <Box display="flex">
+              <Flex justify="center" gap="20px">
                 <Button
                   mt={4}
                   colorScheme="teal"
                   isLoading={isSubmitting}
                   type="submit"
+                  bg="blue.500"
                 >
                   Submit
                 </Button>
                 <Button mt={4} onClick={onClose}>
                   Cancel
                 </Button>
-              </Box>
+              </Flex>
             </form>
           </ModalBody>
         </ModalContent>

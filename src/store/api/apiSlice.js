@@ -50,6 +50,9 @@ export const apiSlice = createApi({
         body: dog,
       }),
       invalidatesTags: ["AllDogs"],
+      transformResponse: (response, meta, arg) => {
+        console.log(response);
+      },
     }),
     deleteDog: builder.mutation({
       query: (dogId) => ({

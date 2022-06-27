@@ -8,17 +8,16 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
     <Box
       maxW="sm"
       maxH="lg"
-      border="2px solid #fda94a"
       rounded="lg"
       overflow="hidden"
-      boxShadow="lg"
-      bg="#04abab"
+      boxShadow="md"
       _hover={{
         bg: "#fda94a",
         color: " white",
       }}
+      // color="orange.300"
     >
-      <Box borderBottom="2px solid #fda94a">
+      <Box boxShadow="lg">
         <CloudinaryImg publicId={dogPhoto} />
       </Box>
 
@@ -26,14 +25,6 @@ const DogCard = ({ dogPhoto, dogExe, name }) => {
         <Box display="flex" alignItems="baseline">
           <Heading as="h3">{name}</Heading>
         </Box>
-
-        <Box
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          noOfLines={1}
-        ></Box>
       </Box>
     </Box>
   );

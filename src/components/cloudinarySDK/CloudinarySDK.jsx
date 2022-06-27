@@ -9,9 +9,9 @@ import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
 const CloudinaryImg = ({ publicId }) => {
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "ddl69s3ju",
-      apiKey: "523689474555957",
-      apiSecret: "1IuyAhpqYnAzplr1dpsC0IbC4T4",
+      cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD,
+      apiKey: import.meta.env.VITE_CLOUDINARY_KEY,
+      apiSecret: import.meta.env.VITE_CLOUDINARY_KEY,
     },
   });
 
