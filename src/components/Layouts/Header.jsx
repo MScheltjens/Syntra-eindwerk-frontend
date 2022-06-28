@@ -14,8 +14,8 @@ const Header = () => {
         >
           <CloudinaryImg
             publicId="doerqp61nrttqopvfabm"
-            width={500}
-            height={200}
+            width={300}
+            height={100}
           />
           <Icon as={FaPaw} boxSize="50px" color="#F18F01" />
         </Flex>

@@ -6,16 +6,20 @@ import CloudinaryImg from "../cloudinarySDK/CloudinarySDK";
 
 const DogGridControl = ({ photo }) => {
   return (
-    <Flex flexDir="column" gap={50}>
-      <Box maxH="100%">
-        {photo ? (
-          <Box maxWidth={500} maxH={500} overflow="hidden" rounded="md">
-            <CloudinaryImg publicId={photo} width="500" height="500" />
-          </Box>
-        ) : (
-          <p>No Image</p>
-        )}
-      </Box>
+    <Flex justifyContent="center" alignItems="center">
+      {photo ? (
+        <Box overflow="hidden" rounded="md">
+          <CloudinaryImg publicId={photo} width="350" height="350" />
+        </Box>
+      ) : (
+        <Box overflow="hidden" rounded="md" objectFit="cover">
+          <CloudinaryImg
+            publicId="j1j6sv9uzibklz5cpukt"
+            width="350"
+            height="350"
+          />
+        </Box>
+      )}
     </Flex>
   );
 };

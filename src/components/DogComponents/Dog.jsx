@@ -15,7 +15,7 @@ const Dog = () => {
     isSuccess,
     isError,
     error,
-  } = useGetDogQuery(dogId);
+  } = useGetDogQuery(dogId, { pollingInteval: 1000 });
   const [deleteDog, { data }] = useDeleteDogMutation();
   const handleDelete = async () => {
     await deleteDog(dogId);
@@ -59,12 +59,13 @@ const Dog = () => {
               boxShadow="2xl"
               rounded="md"
               bgColor="#108dc7"
-              p={5}
+              p="10px"
+              overflow="hidden"
             >
               <DogGridControl photo={dog.photo} handleDelete={handleDelete} />
             </GridItem>
             <GridItem
-              rowSpan={3}
+              rowSpan={2}
               colSpan={4}
               boxShadow="2xl"
               rounded="md"

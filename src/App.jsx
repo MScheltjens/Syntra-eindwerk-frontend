@@ -9,6 +9,7 @@ import RouteNotFound from "./components/404/RouteNotFound";
 import HealthFood from "./components/HealthFood";
 import PrivateRoutes from "./Routes/PrivateRoutes";
 import "./App.css";
+import MobileAppExample from "./components/MobileAppExample";
 const App = () => {
   return (
     <div>
@@ -30,6 +31,8 @@ const App = () => {
             </Route>
           </Route>
         </Route>
+        <Route exact path="mobileAppExample" element={<MobileAppExample />} />
+
         <Route
           path="*"
           element={

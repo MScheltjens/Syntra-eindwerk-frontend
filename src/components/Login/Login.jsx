@@ -47,7 +47,9 @@ const Login = () => {
   useEffect(() => {
     if (data) {
       dispatch(login(data));
-      data.isTrainer === false ? setHidden(false) : navigate("dashboard");
+      data.isTrainer === false
+        ? navigate("mobileAppExample")
+        : navigate("dashboard");
     }
     if (isError) {
       console.log(error);

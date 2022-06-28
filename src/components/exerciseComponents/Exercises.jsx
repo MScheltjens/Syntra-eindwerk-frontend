@@ -23,8 +23,6 @@ const Exercises = () => {
 
   return (
     <>
-      {/* {<p>{JSON.stringify(wdata)}</p>} */}
-
       <InputGroup
         m="20px"
         w="82vw"

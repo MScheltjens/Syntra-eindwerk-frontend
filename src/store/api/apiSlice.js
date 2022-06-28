@@ -41,7 +41,7 @@ export const apiSlice = createApi({
         method: "POST",
         body: dogExe,
       }),
-      invalidatesTags: ["Dog"],
+      invalidatesTags: ["Dog", "Exercises"],
     }),
     addDog: builder.mutation({
       query: (dog) => ({

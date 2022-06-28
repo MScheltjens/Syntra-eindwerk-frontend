@@ -28,12 +28,11 @@ const ExerciseAccordion = ({ data }) => {
         <Box
           w="80vw"
           m="30px"
-          maxH="600"
+          maxH="60vh"
           overflow="hidden"
           overflowY="auto"
           color="#108dc7"
         >
-          <p>{JSON.stringify(data)}</p>
           <ExerciseAccordion />
           <Accordion>
             {data.map((ex) => {
@@ -62,10 +61,21 @@ const ExerciseAccordion = ({ data }) => {
                           <Text>Created by: {ex.trainer.firstName}</Text>
                         </Box>
                         <hr />
-                        <Heading size="md" p="10px">
-                          Dogs:
-                        </Heading>
-                        <p>{JSON.stringify(ex.dog_exercises)}</p>
+                        {ex.dogExercises && (
+                          <Box>
+                            <Heading size="md" p="10px">
+                              Dogs:
+                            </Heading>
+
+                            <ul>
+                              {ex.dogExercises.map((dogEx) => (
+                                <Link to={"/dashboard/dogs/" + dogEx.dog.id}>
+                                  <li>{dogEx.dog.name}</li>
+                                </Link>
+                              ))}
+                            </ul>
+                          </Box>
+                        )}
                       </Box>
                       <AspectRatio w="560px" ratio={4 / 3}>
                         <iframe

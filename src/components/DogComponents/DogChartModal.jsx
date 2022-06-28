@@ -64,7 +64,22 @@ const DogChartModal = ({ dogExe }) => {
               <Box width="500px">
                 <Heading mb={5}>Daily progress</Heading>
                 <DogBarChart dogExe={dogExe} />
+                <Center>
+                  <Flex direction="column">
+                    <Heading size="lg" mb="10px" mt="20px">
+                      Remarks
+                    </Heading>
+                    <ul>
+                      {dogExe.exerciseRegistrations.map((exReg) => (
+                        <li>
+                          {exReg.date} : {exReg.remarks}
+                        </li>
+                      ))}
+                    </ul>
+                  </Flex>
+                </Center>
               </Box>
+              <Box></Box>
               <Box>
                 <Heading mb={5}>Weekly progress</Heading>
                 <DogRadialChart dogExe={dogExe} />
