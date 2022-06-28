@@ -46,7 +46,6 @@ const CreateDogExerciseModal = () => {
   const { dogId } = useParams();
 
   const handleChange = (e) => {
-    // setDailyAmount(e);
     setTotalAmount(e * 7);
   };
 

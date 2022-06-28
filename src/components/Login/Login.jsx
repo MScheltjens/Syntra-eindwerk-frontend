@@ -42,7 +42,6 @@ const Login = () => {
       password,
     });
   };
-
   // save userdata in store and redirect to dashboard if the user is a trainer
   useEffect(() => {
     if (data) {
@@ -136,6 +135,9 @@ const Login = () => {
               >
                 Login
               </Button>
+              <a href="https://wdev2.be/fs_mathias/eindwerk/register">
+                Register
+              </a>
             </Stack>
           </form>
         </Box>

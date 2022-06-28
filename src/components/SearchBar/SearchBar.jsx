@@ -8,7 +8,6 @@ const SearchBar = ({ placeholder, data, setSelection }) => {
   const handleFilter = (e) => {
     const searchWord = e.target.value;
     const newFilter = data.filter((value) => {
-      // nog ombouwen zodat door heel de objecten geloopt kan worden (object.entries)
       return value.name.toLowerCase().includes(searchWord.toLowerCase());
     });
 
